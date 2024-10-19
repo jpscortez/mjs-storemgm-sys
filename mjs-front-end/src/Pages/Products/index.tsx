@@ -1,6 +1,6 @@
 import ProductsTable from "./components/ProductsTable"
 
-export default function Products() {
+export default function ProductsPage() {
 
   const products = [
     {
@@ -84,7 +84,7 @@ export default function Products() {
   ]
 
   return (
-    <div className="w-10/12 mx-auto pt-4">
+    <div className="w-10/12 mx-auto my- pt-4">
       <ProductsTable products={products} />
     </div>
 
