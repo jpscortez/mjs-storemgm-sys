@@ -9,9 +9,9 @@ export default function NavBarItem({ caption, ...rest }: NavBarItemProps) {
   return (
     <NavLink {...rest}
       className={({ isActive }) =>
-        twMerge("flex items-center my-2 px-4 rounded-lg hover:bg-slate-700",
+        twMerge("flex items-center my-2 px-4 rounded-lg hover:bg-slate-700  active:bg-slate-600",
           isActive
-            ? "font-bold"
+            ? "font-bold underline"
             : "font-light")
       }
     >
