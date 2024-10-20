@@ -12,6 +12,54 @@ export default function SellPage() {
       price: 2999
     },
     {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
+      name: 'Apple MacBook Pro 17"',
+      code: '0000',
+      category: 'Laptop',
+      price: 2999
+    },
+    {
       name: 'Microsoft Surface Pro',
       code: 0,
       category: 'Laptop PC',
@@ -61,7 +109,7 @@ export default function SellPage() {
         </div>
         <div className="p-4 rounded-lg bg-slate-900">
           <div className="flex flex-row uppercase font-bold gap-2">
-            <div className="text-sm w-10">
+            <div className="text-sm w-10 text-center">
               #
             </div>
             <div className="text-sm flex-1">
