@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import NavBarItem from "./NavBarItem";
-import { UserContext } from "@/Utils/UserProvider";
-import { useContext } from "react";
+import { useAuth } from "@/Utils/Hooks/UseAuth";
 
 export default function NavBar() {
-  const { logout } = useContext(UserContext)
+  const { logout } = useAuth()
   return (
     <nav className="bg-slate-900 h-16 px-4 flex justify-between items-center">
       <div className="w-12">LOGO</div>

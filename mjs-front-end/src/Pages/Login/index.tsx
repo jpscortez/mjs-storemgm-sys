@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { UserContext } from "@/Utils/UserProvider";
-import { useContext } from "react";
+import { useAuth } from "@/Utils/Hooks/UseAuth";
 import { Navigate } from "react-router-dom";
 
 export default function Login() {
-  const { isLoggedIn, login } = useContext(UserContext)
+  const { isLoggedIn, login } = useAuth()
 
   return isLoggedIn ?
     <Navigate to="/" /> :

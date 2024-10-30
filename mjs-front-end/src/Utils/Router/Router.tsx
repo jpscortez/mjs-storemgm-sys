@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "../Pages/Home";
-import ProductsPage from "../Pages/Products";
-import Login from "../Pages/Login";
 import ProtectedRoutes from "./ProtectedRoutes";
-import App from "../App";
 import SellPage from "@/Pages/Sell";
+import Login from "@/Pages/Login";
+import App from "@/App";
+import HomePage from "@/Pages/Home";
+import ProductsPage from "@/Pages/Products";
 
 export default function Router() {
   return (
