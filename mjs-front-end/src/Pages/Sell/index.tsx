@@ -3,73 +3,17 @@ import SellInputs from "./SellInputs";
 import SellTotal from "./SellTotal";
 import { SoldProduct } from "@/Models/Product";
 import SellProductTable from "./SellProductTable";
+import { useState } from "react";
 
 export default function SellPage() {
-  const addedProducts: SoldProduct[] = [
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-    {
-      name: 'Apple MacBook Pro 17"',
-      code: '0000',
-      category: 'Laptop',
-      price: 2999,
-      amount: 2
-    },
-  ]
+  const [addedProducts, addProducts] = useState<SoldProduct[]>([])
+
+  function onProductSubmitted(newProduct: SoldProduct) {
+    addProducts((oldProductList) => {
+      return [...oldProductList, newProduct]
+    }
+    )
+  }
 
   return (
     <div className="w-full my-6 p-6 rounded-lg bg-slate-700">
@@ -77,9 +21,9 @@ export default function SellPage() {
         <h2 className="text-2xl py-4">Venda</h2>
       </div>
       <div className="flex flex-col min-h-96 gap-2">
-        <SellInputs />
+        <SellInputs addProduct={onProductSubmitted} />
         <SellProductTable products={addedProducts} />
-        <SellTotal />
+        <SellTotal products={addedProducts} />
         <Button>CONCLUIR</Button>
       </div>
     </div>

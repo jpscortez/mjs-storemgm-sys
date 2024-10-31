@@ -8,7 +8,7 @@ export type Product = {
 export type SoldProduct = {
     name: string,
     code: string,
-    category: string,
     amount: number,
-    price: number
+    price: number,
+    discount: number
 }

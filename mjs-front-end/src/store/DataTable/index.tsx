@@ -1,13 +1,16 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
+import { twMerge } from "tailwind-merge";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TValue[]
+    emptyDataMsg?: string
+    onRowDblClick?: (row: TData) => void
+    className: string
 }
 
-export default function DataTable({ columns, data }: DataTableProps<TData, TValue>) {
+export default function DataTable({ columns, data, emptyDataMsg = "No results.", onRowDblClick: onRowDblClickExternal, className }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
         columns,
@@ -15,18 +18,20 @@ export default function DataTable({ columns, data }: DataTableProps<TData, TValu
     });
 
     const onRowDblClick = (row: TData) => {
-        console.log(row)
+        if (onRowDblClickExternal) onRowDblClickExternal(row)
     }
 
     return (
-        <div className="p-4 rounded-lg bg-slate-900">
-            <Table>
-                <TableHeader>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id} className="uppercase">
-                            {headerGroup.headers.map((header) => {
+        <div className={twMerge("overflow-y-auto overflow-x-clip rounded-t-lg inset-2 bg-slate-900 h-128", className)}>
+            <Table className="relative">
+                <TableHeader className="uppercase sticky top-0 bg-slate-800">
+                    {table.getHeaderGroups().map((headerGroup, i) => (
+                        <TableRow key={`${i}_${headerGroup.id}`}>
+                            {headerGroup.headers.map((header, j) => {
                                 return (
-                                    <TableHead key={header.id}>
+                                    <TableHead
+                                        key={`${j}_${header.id}`}
+                                    >
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -41,24 +46,26 @@ export default function DataTable({ columns, data }: DataTableProps<TData, TValu
                 </TableHeader>
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map((row) => (
+                        table.getRowModel().rows.map((row, i) => (
                             <TableRow
                                 className="transition-colors hover:bg-slate-700 hover:cursor-pointer"
-                                key={row.id}
+                                key={`${i}_${row.id}`}
                                 data-state={row.getIsSelected() && "selected"}
                                 onDoubleClick={() => onRowDblClick(row.original as TData)}
                             >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                {row.getVisibleCells().map((cell, j) => (
+                                    <TableCell
+                                        key={`${j}_${cell.id}`}
+                                    >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}
                             </TableRow>
                         ))
                     ) : (
-                        <TableRow>
-                            <TableCell colSpan={columns.length} className="h-24 text-center">
-                                No results.
+                        <TableRow className="h-32">
+                            <TableCell colSpan={columns.length} className="text-center">
+                                {emptyDataMsg}
                             </TableCell>
                         </TableRow>
                     )}

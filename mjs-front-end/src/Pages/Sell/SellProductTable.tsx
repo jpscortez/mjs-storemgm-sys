@@ -9,16 +9,19 @@ interface SellProductsTableProps {
 
 const columns: ColumnDef<SoldProduct>[] = [
     {
-        accessorKey: "code",
+        accessorKey: "i",
         header: "#",
+        cell: ({ row }) => {
+            return (<div>{row.index + 1}</div>)
+        }
+    },
+    {
+        accessorKey: "code",
+        header: "code",
     },
     {
         accessorKey: "name",
         header: "Produto",
-    },
-    {
-        accessorKey: "category",
-        header: "categoria",
     },
     {
         accessorKey: "price",
@@ -45,6 +48,11 @@ const columns: ColumnDef<SoldProduct>[] = [
 
 export default function SellProductTable({ products }: SellProductsTableProps) {
     return (
-        <DataTable columns={columns} data={products} />
+        <DataTable
+            columns={columns}
+            data={products}
+            onRowDblClick={(r) => console.log(r)}
+            className="h-64"
+        />
     )
 }
