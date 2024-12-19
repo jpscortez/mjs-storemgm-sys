@@ -18,7 +18,7 @@ export default function SellTotal({ products }: SellTotalProps) {
                 <div className="flex flex-col w-40 text-right">
                     <b>TOTAL A PAGAR</b>
                     <span className="text-xl">
-                        {(products.map((p) => p.amount * p.price).reduce((total, p) => total += p, 0)).toFixed(2)}
+                        R$ {(products.map((p) => p.amount * p.price).reduce((total, p) => total += p, 0)).toFixed(2)}
                     </span>
                 </div>
             </div>

@@ -9,7 +9,7 @@ export default function Login() {
   return isLoggedIn ?
     <Navigate to="/" /> :
     (
-      <div className="bg-slate-800 text-slate-300 h-screen flex items-center">
+      <div className="bg-slate-800 text-dark-50 h-screen flex items-center">
         <div className="w-64 mx-auto p-6 rounded-lg bg-slate-700">
           <h1 className="text-lg font-bold pb-8">Login</h1>
           <div className="grid gap-1">

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="py-4">
+    <div>
       <Link to="/sell">
-        <div className="size-40 p-6 rounded-lg bg-slate-900 shadow-sm hover:bg-slate-700 active:bg-slate-600">
+        <div className="size-40 p-6 shadow-2xl rounded-lg bg-slate-50 hover:border hover:border-dark-200 active:bg-slate-100">
           <span className="font-bold uppercase">Nova Venda</span>
           <div>
             <ShoppingBasket className="mx-auto" size={80} />

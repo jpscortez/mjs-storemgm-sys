@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom"
-import Root from "./store/Root"
+import SideBarRoot from "./store/SideBar"
 
 function App() {
 
   return (
-    <Root >
-      <Outlet/>
-    </Root>
+    <main className="relative container bg-white text-dark-800 flex flex-row flex-wrap">
+      <SideBarRoot />
+
+      <div className="flex-1 p-4">
+        <Outlet />
+      </div>
+    </main>
   )
 }
 

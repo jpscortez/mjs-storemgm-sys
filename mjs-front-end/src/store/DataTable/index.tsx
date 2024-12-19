@@ -22,9 +22,9 @@ export default function DataTable({ columns, data, emptyDataMsg = "No results.",
     }
 
     return (
-        <div className={twMerge("overflow-y-auto overflow-x-clip rounded-t-lg inset-2 bg-slate-900 h-128", className)}>
+        <div className={twMerge("bg-white overflow-y-auto uppercase overflow-x-clip rounded-t-lg border inset-2 h-128", className)}>
             <Table className="relative">
-                <TableHeader className="uppercase sticky top-0 bg-slate-800">
+                <TableHeader className="sticky top-0">
                     {table.getHeaderGroups().map((headerGroup, i) => (
                         <TableRow key={`${i}_${headerGroup.id}`}>
                             {headerGroup.headers.map((header, j) => {
@@ -48,7 +48,7 @@ export default function DataTable({ columns, data, emptyDataMsg = "No results.",
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row, i) => (
                             <TableRow
-                                className="transition-colors hover:bg-slate-700 hover:cursor-pointer"
+                                className="transition-colors hover:cursor-pointer"
                                 key={`${i}_${row.id}`}
                                 data-state={row.getIsSelected() && "selected"}
                                 onDoubleClick={() => onRowDblClick(row.original as TData)}

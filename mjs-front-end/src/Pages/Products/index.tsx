@@ -1,5 +1,6 @@
 import { Product } from "@/Models/Product"
 import ProductsTable from "./components/ProductsTable"
+import { Button } from "@/components/ui/button"
 
 export default function ProductsPage() {
 
@@ -145,7 +146,8 @@ export default function ProductsPage() {
   ]
 
   return (
-    <div className="w-full my-6 p-6 rounded-lg bg-slate-700">
+    <div className="w-full my-6 p-6 rounded-lg bg-slate-50 grid">
+      <Button variant="filled" className="my-2">ADICIONAR</Button>
       <ProductsTable products={products} />
     </div>
 

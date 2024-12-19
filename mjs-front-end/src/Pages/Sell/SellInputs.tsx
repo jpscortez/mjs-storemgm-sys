@@ -128,7 +128,12 @@ export default function SellInputs({ addProduct }: SellInputsProps) {
                     />
                     <div className="flex-1" />
 
-                    <Button type="submit">ADICIONAR</Button>
+                    <Button
+                        variant="filled"
+                        type="submit"
+                    >
+                        ADICIONAR
+                    </Button>
                 </div>
             </form>
         </Form>

@@ -16,7 +16,7 @@ export default function SellPage() {
   }
 
   return (
-    <div className="w-full my-6 p-6 rounded-lg bg-slate-700">
+    <div className="w-full my-6 p-6 rounded-lg bg-slate-50 shadow-xl shadow-slate-300">
       <div>
         <h2 className="text-2xl py-4">Venda</h2>
       </div>
@@ -24,7 +24,7 @@ export default function SellPage() {
         <SellInputs addProduct={onProductSubmitted} />
         <SellProductTable products={addedProducts} />
         <SellTotal products={addedProducts} />
-        <Button>CONCLUIR</Button>
+        <Button variant="filled">CONCLUIR</Button>
       </div>
     </div>
 
