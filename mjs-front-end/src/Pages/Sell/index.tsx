@@ -4,6 +4,7 @@ import SellTotal from "./SellTotal";
 import { SoldProduct } from "@/Models/Product";
 import SellProductTable from "./SellProductTable";
 import { useState } from "react";
+import { CircleDollarSign } from "lucide-react";
 
 export default function SellPage() {
   const [addedProducts, addProducts] = useState<SoldProduct[]>([])
@@ -18,7 +19,12 @@ export default function SellPage() {
   return (
     <div className="w-full my-6 p-6 rounded-lg bg-slate-50 shadow-xl shadow-slate-300">
       <div>
-        <h2 className="text-2xl py-4">Venda</h2>
+        <h2 className="inline-flex gap-2 items-center text-2xl py-4">
+          <CircleDollarSign />
+          <span>
+            Venda
+          </span>
+        </h2>
       </div>
       <div className="flex flex-col min-h-96 gap-2">
         <SellInputs addProduct={onProductSubmitted} />

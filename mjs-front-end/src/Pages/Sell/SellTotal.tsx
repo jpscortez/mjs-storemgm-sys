@@ -1,4 +1,5 @@
 import { SoldProduct } from "@/Models/Product"
+import { parsePrice } from "@/Utils/Functions/parser"
 
 interface SellTotalProps {
     products: SoldProduct[]
@@ -18,7 +19,7 @@ export default function SellTotal({ products }: SellTotalProps) {
                 <div className="flex flex-col w-40 text-right">
                     <b>TOTAL A PAGAR</b>
                     <span className="text-xl">
-                        R$ {(products.map((p) => p.amount * p.price).reduce((total, p) => total += p, 0)).toFixed(2)}
+                        {parsePrice(products.map((p) => p.amount * p.price).reduce((total, p) => total += p, 0))}
                     </span>
                 </div>
             </div>

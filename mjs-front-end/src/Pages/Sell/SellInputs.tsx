@@ -36,7 +36,7 @@ export default function SellInputs({ addProduct }: SellInputsProps) {
             amount: 1
         }
     })
-    const { handleSubmit } = form;
+    const { handleSubmit, reset } = form;
 
     const onSubmit = (data: addProductToCartFormData) => {
         const { amount, code: codeStr, description: name, discount } = data
@@ -51,6 +51,8 @@ export default function SellInputs({ addProduct }: SellInputsProps) {
             price
         } as SoldProduct)
         // addProduct()
+
+        reset({})
     }
 
     const getPrice = (code: number) => {

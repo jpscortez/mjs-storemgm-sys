@@ -1,8 +1,8 @@
 export type Product = {
-    name: string,
-    code: string,
-    category: string,
-    price: number
+    description: string,
+    code: number,
+    sellPrice: number,
+    stockUnits: number
 }
 
 export type SoldProduct = {

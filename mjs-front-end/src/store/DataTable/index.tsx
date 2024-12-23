@@ -7,7 +7,7 @@ interface DataTableProps<TData, TValue> {
     data: TValue[]
     emptyDataMsg?: string
     onRowDblClick?: (row: TData) => void
-    className: string
+    className?: string
 }
 
 export default function DataTable({ columns, data, emptyDataMsg = "No results.", onRowDblClick: onRowDblClickExternal, className }: DataTableProps<TData, TValue>) {
@@ -29,7 +29,7 @@ export default function DataTable({ columns, data, emptyDataMsg = "No results.",
                         <TableRow key={`${i}_${headerGroup.id}`}>
                             {headerGroup.headers.map((header, j) => {
                                 return (
-                                    <TableHead
+                                    <TableHead className="w-fit"
                                         key={`${j}_${header.id}`}
                                     >
                                         {header.isPlaceholder
@@ -54,7 +54,7 @@ export default function DataTable({ columns, data, emptyDataMsg = "No results.",
                                 onDoubleClick={() => onRowDblClick(row.original as TData)}
                             >
                                 {row.getVisibleCells().map((cell, j) => (
-                                    <TableCell
+                                    <TableCell className="w-fit"
                                         key={`${j}_${cell.id}`}
                                     >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}

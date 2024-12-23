@@ -1,3 +1,3 @@
 export function parsePrice(value: number) {
-    return value.toFixed(2);
+    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
