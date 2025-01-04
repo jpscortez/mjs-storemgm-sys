@@ -11,35 +11,10 @@ datasource db {
 }
 
 model Product {
-  code        Int           @id @default(autoincrement())
-  description String
-  sellPrice   Decimal       @map("sell_price")
-  unit        String
-  stockAmount Int
-  solds       ProductSell[]
+  code        Int     @id @default(autoincrement())
+  name        String
+  sellPrice   Decimal @map("sell_price")
+  stockAmount Int     @map("stock_amount")
 
   @@map("products")
-}
-
-model ProductSell {
-  sell     Sell @relation(fields: [sellCode], references: [code])
-  sellCode Int  @map("sell_code")
-
-  product     Product @relation(fields: [productCode], references: [code])
-  productCode Int
-
-  amount     Int
-  totalPrice Decimal
-
-  @@id([sellCode, productCode])
-  @@map("product_sell")
-}
-
-model Sell {
-  code      Int           @id @default(autoincrement())
-  client    String
-  timestamp DateTime      @default(now())
-  products  ProductSell[]
-
-  @@map("sells")
 }
