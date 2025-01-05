@@ -21,6 +21,28 @@ export async function routes(app: FastifyTypedInstance) {
         return reply.status(200).send(products)
     })
 
+    app.get("/products/:code", {
+        schema: {
+            description: "List Products",
+            tags: ["Products"],
+            params: z.object({
+                code: z.coerce.number().int()
+            }),
+            response: {
+                200: z.object({
+                    name: z.string(),
+                    code: z.number().int(),
+                    sellPrice: z.number(),
+                    stockAmount: z.number()
+                })
+            }
+        }
+    }, async (request, reply) => {
+        const { code } = request.params
+        const products = await service.GetProductByCode(code)
+        return reply.status(200).send(products)
+    })
+
     app.post("/products", {
         schema: {
             description: "Register a new Product",

@@ -15,6 +15,13 @@ interface CreateProductsRequest {
     code?: number,
 }
 
-export async function createProduct({ code, name, sellPrice, stockAmount }: CreateProductsRequest) : Promise<void> {
+export async function createProduct({ code, name, sellPrice, stockAmount } : CreateProductsRequest) : Promise<void> {
     await axios.post("http://localhost:3333/products", {code, name, sellPrice, stockAmount})
+}
+
+export async function getProduct(code: number) : Promise<Product> {
+    const product = axios.get(`http://localhost:3333/products/${code}`)
+        .then(response => response.data)
+
+    return product
 }
