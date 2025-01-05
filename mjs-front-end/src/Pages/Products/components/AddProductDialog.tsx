@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, Dialo
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createProduct } from "@/data/products";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/useToast";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,11 +31,11 @@ export function AddProductDialog() {
 
     const { mutateAsync: createProductFn, isPending } = useMutation({
         mutationFn: createProduct,
-        onSuccess(_, { code, description, sellPrice, stockUnits }) {
+        onSuccess(_, { code, name, sellPrice, stockAmount }) {
             // const cached = queryClient.getQueryData(['products'])
 
             queryClient.setQueryData(['products'], (data: Product[]) => {
-                return [...data, { code, description, sellPrice, stockUnits }]
+                return [...data, { code, name, sellPrice, stockAmount }]
             })
         },
     })
@@ -47,7 +47,7 @@ export function AddProductDialog() {
 
     async function onSubmit({ code, description, sellPrice, stockUnits }: NewProductFormData) {
         try {
-            await createProductFn({ code, description, sellPrice, stockUnits })
+            await createProductFn({ code, name: description, sellPrice, stockAmount: stockUnits })
 
             reset()
             toast({

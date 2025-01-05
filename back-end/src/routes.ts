@@ -1,16 +1,6 @@
-import z, { number } from "zod";
+import z from "zod";
 import { FastifyTypedInstance } from "./types";
-import * as service from "./services/product/create-product-service";
-import { GetAllProducts } from "./services/product/get-all-product-service";
-
-interface Product {
-    name: string,
-    code: number,
-    sellPrice: number,
-    stockAmount: number
-}
-
-const products: Product[] = []
+import * as service from "./services/product";
 
 export async function routes(app: FastifyTypedInstance) {
     app.get("/products", {
@@ -27,7 +17,7 @@ export async function routes(app: FastifyTypedInstance) {
             }
         }
     }, async (_, reply) => {
-        const products = await GetAllProducts()
+        const products = await service.GetAllProducts()
         return reply.status(200).send(products)
     })
 

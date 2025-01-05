@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, Dialo
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createProduct } from "@/data/products";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/useToast";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,7 +52,7 @@ export function EditProductDialog({ product }: EditProductDialogProps) {
         },
     })
 
-    const { code, description, sellPrice, stockUnits } = product
+    const { code, name: description, sellPrice, stockAmount: stockUnits } = product
     const form = useForm<EditProductFormData>({
         resolver: zodResolver(editProductFormSchema),
         defaultValues: { code, description, sellPrice, stockUnits }
@@ -61,7 +61,7 @@ export function EditProductDialog({ product }: EditProductDialogProps) {
 
     async function onSubmit({ code, description, sellPrice, stockUnits }: EditProductFormData) {
         try {
-            await editProductFn({ code, description, sellPrice, stockUnits })
+            await editProductFn({ code, name: description, sellPrice, stockAmount: stockUnits })
 
             toast({
                 variant: 'default',

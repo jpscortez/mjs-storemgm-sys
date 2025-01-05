@@ -1,43 +1,20 @@
 import { Product } from "@/Models/Product";
+import axios from "axios";
 
-export async function getProducts() {
-    await new Promise(resolve => setTimeout(resolve, 1000))
+export async function getProducts() : Promise<Product[]> {
+    const products = axios.get("http://localhost:3333/products")
+        .then(response => response.data)
 
-    return products
+    return products        
 }
 
 interface CreateProductsRequest {
-    description: string,
+    name: string,
     sellPrice: number,
-    stockUnits: number,
+    stockAmount: number,
     code?: number,
 }
 
-export async function createProduct({ code, description, sellPrice, stockUnits }: CreateProductsRequest) {
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    code = code ?? 0
-    products.push({ code, description, sellPrice, stockUnits })
-
-    console.log(`Remember to save!!!!`)
+export async function createProduct({ code, name, sellPrice, stockAmount }: CreateProductsRequest) : Promise<void> {
+    await axios.post("http://localhost:3333/products", {code, name, sellPrice, stockAmount})
 }
-
-const products: Product[] = [
-    {
-        description: 'Apple MacBook Pro 17"',
-        code: 0,
-        stockUnits: 15,
-        sellPrice: 2999
-    },
-    {
-        description: 'Microsoft Surface Pro',
-        code: 1,
-        stockUnits: 15,
-        sellPrice: 1999
-    },
-    {
-        description: 'Magic Mouse 2',
-        code: 2,
-        stockUnits: 15,
-        sellPrice: 99
-    },
-]
