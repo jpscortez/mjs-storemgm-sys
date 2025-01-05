@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createProduct } from "@/data/products";
+import { updateProduct } from "@/data/products";
 import { useToast } from "@/hooks/useToast";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";
@@ -35,20 +35,14 @@ export function EditProductDialog({ product }: EditProductDialogProps) {
     const { toast } = useToast()
 
     const { mutateAsync: editProductFn, isPending } = useMutation({
-        mutationFn: createProduct,
+        mutationFn: updateProduct,
         onMutate: (updatedRow) => {
-            // Optimistically update the UI
+            
             queryClient.setQueryData(['products'], (oldData: Product[]) =>
                 oldData.map((row) =>
                     row.code === updatedRow.code ? { ...row, ...updatedRow } : row
                 )
             );
-        },
-        onSettled: () => {
-            // queryClient.invalidateQueries({
-            //     queryKey: ['products'],
-            //     refetchType: 'active'
-            // });
         },
     })
 
@@ -103,6 +97,7 @@ export function EditProductDialog({ product }: EditProductDialogProps) {
                                         <FormItem>
                                             <FormLabel>CÓDIGO</FormLabel>
                                             <Input
+                                                disabled
                                                 type="number"
                                                 className="remove-arrow"
                                                 {...field} />

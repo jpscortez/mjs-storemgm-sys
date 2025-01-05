@@ -33,7 +33,7 @@ export const columns: ColumnDef<Product>[] = [
             return (
                 <div className="inline-flex items-end">
                     <EditProductDialog product={row.original} />
-                    <RemoveProductDialog />
+                    <RemoveProductDialog product={row.original} />
                 </div>
             );
         }

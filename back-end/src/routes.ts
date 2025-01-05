@@ -69,4 +69,45 @@ export async function routes(app: FastifyTypedInstance) {
 
         return reply.status(201).send()
     })
+
+    app.put("/products/:code", {
+        schema: {
+            description: "Edit Products by Code",
+            tags: ["Products"],
+            params: z.object({
+                code: z.coerce.number().int()
+            }),
+            body: z.object({
+                name: z.string(),
+                sellPrice: z.number(),
+                stockAmount: z.number()
+            }),
+            response: {
+                204: z.null().describe("Product updated!")
+            }
+        }
+    }, async (response, reply) => {
+        const { code } = response.params
+        const { name, sellPrice, stockAmount } = response.body
+        await service.UpdateProduct({ code, name, sellPrice, stockAmount })
+
+        return reply.status(204).send()
+    })
+
+    app.delete("/products/:code", {
+        schema: {
+            description: "Delete Product By Code",
+            tags: ["Products"],
+            params: z.object({
+                code: z.coerce.number().int()
+            }),
+            response: {
+                204: z.null().describe("Product deleted!")
+            }
+        }
+    }, async (request, reply) => {
+        const { code } = request.params
+        await service.DeleteProductByCode(code)
+        return reply.status(204).send()
+    })
 }

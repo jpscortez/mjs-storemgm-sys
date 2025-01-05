@@ -2,7 +2,7 @@ import { Product } from "@/Models/Product";
 import axios from "axios";
 
 export async function getProducts() : Promise<Product[]> {
-    const products = axios.get("http://localhost:3333/products")
+    const products = await axios.get("http://localhost:3333/products")
         .then(response => response.data)
 
     return products        
@@ -24,4 +24,19 @@ export async function getProduct(code: number) : Promise<Product> {
         .then(response => response.data)
 
     return product
+}
+
+export async function deleteProduct(code: number) {
+    await axios.delete(`http://localhost:3333/products/${code}`)
+}
+
+interface UpdateProductsRequest {
+    name: string,
+    sellPrice: number,
+    stockAmount: number,
+    code: number,
+}
+
+export async function updateProduct({ code, name, sellPrice, stockAmount } : UpdateProductsRequest) : Promise<void> {
+    await axios.put(`http://localhost:3333/products/${code}`, {name, sellPrice, stockAmount})
 }

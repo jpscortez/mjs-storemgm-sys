@@ -1,16 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { deleteProduct } from "@/data/products";
+import { Product } from "@/Models/Product";
+import { queryClient } from "@/Utils/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 
-export function RemoveProductDialog() {
+interface RemoveProductDialogProps {
+    product: Product
+}
+
+export function RemoveProductDialog({ product } : RemoveProductDialogProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-
+    const { mutateAsync: deleteProductFn } = useMutation({
+        mutationFn: deleteProduct,
+        onSuccess(_, code) {
+            queryClient.setQueryData(['products'], (data: Product[]) => {
+                const newData = data.filter((p) => p.code !== code)
+                return newData
+            })
+        },
+    })
+    
     // Function to handle confirmation (e.g., deleting an item)
     const handleConfirm = () => {
         // Perform your action here (e.g., delete the item)
-        console.log('Item deleted!');
+        deleteProductFn(product.code)
+        
         closeDialog(); // Close the dialog after confirming
     };
     const closeDialog = () => setIsOpen(false);
