@@ -2,10 +2,7 @@ import { SoldProduct } from "@/Models/Product";
 import DataTable from "@/store/DataTable";
 import { parsePrice } from "@/Utils/Functions/parser";
 import { ColumnDef } from "@tanstack/react-table";
-
-interface SellProductsTableProps {
-    products: SoldProduct[]
-}
+import { useCart } from "./components/useCart";
 
 const columns: ColumnDef<SoldProduct>[] = [
     {
@@ -46,7 +43,9 @@ const columns: ColumnDef<SoldProduct>[] = [
     },
 ]
 
-export default function SellProductTable({ products }: SellProductsTableProps) {
+export default function SellProductTable() {
+    const { products } = useCart()
+
     return (
         <DataTable
             columns={columns}

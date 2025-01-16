@@ -1,11 +1,10 @@
-import { SoldProduct } from "@/Models/Product"
 import { parsePrice } from "@/Utils/Functions/parser"
+import { useCart } from "./components/useCart"
 
-interface SellTotalProps {
-    products: SoldProduct[]
-}
 
-export default function SellTotal({ products }: SellTotalProps) {
+export default function SellTotal() {
+    const { products } = useCart()
+
     return (
         <div className="flex justify-between px-2">
             <h3 className="font-bold text-2xl">TOTAL</h3>

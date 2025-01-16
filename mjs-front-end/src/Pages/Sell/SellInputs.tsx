@@ -7,10 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-interface SellInputsProps {
-    addProduct: (newProduct: SoldProduct) => void
-}
+import { useCart } from "./components/useCart";
 
 const addProductToCartFormSchema = z.object({
     code: z
@@ -38,7 +35,8 @@ const addProductToCartFormSchema = z.object({
 
 type addProductToCartFormData = z.infer<typeof addProductToCartFormSchema>
 
-export default function SellInputs({ addProduct }: SellInputsProps) {
+export default function SellInputs() {
+    const { addProduct } = useCart()
 
     const form = useForm<addProductToCartFormData>({
         resolver: zodResolver(addProductToCartFormSchema),
@@ -61,7 +59,6 @@ export default function SellInputs({ addProduct }: SellInputsProps) {
             discount,
             price
         } as SoldProduct)
-        // addProduct()
 
         reset({})
     }
