@@ -2,7 +2,7 @@ import { SoldProduct } from "@/Models/Product";
 import DataTable from "@/store/DataTable";
 import { parsePrice } from "@/Utils/Functions/parser";
 import { ColumnDef } from "@tanstack/react-table";
-import { useCart } from "./components/useCart";
+import { useCart } from "./useCart";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 

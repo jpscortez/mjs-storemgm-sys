@@ -1,5 +1,5 @@
 import { parsePrice } from "@/Utils/Functions/parser"
-import { useCart } from "./components/useCart"
+import { useCart } from "./useCart"
 
 
 export default function SellTotal() {

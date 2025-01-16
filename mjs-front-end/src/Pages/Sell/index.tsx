@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import SellInputs from "./SellInputs";
-import SellTotal from "./SellTotal";
-import SellProductTable from "./SellProductTable";
+import SellInputs from "./components/SellInputs";
+import SellTotal from "./components/SellTotal";
+import SellProductTable from "./components/SellProductTable";
 import { CircleDollarSign } from "lucide-react";
 import { CartProvider } from "./components/CartProvider";
+import SellConfirmButton from "./components/SellConfirmButton";
 
 export default function SellPage() {
 
@@ -22,7 +22,7 @@ export default function SellPage() {
         <SellInputs />
         <SellProductTable />
         <SellTotal />
-        <Button variant="filled">CONCLUIR</Button>
+        <SellConfirmButton />
       </CartProvider>
       </div>
     </div>

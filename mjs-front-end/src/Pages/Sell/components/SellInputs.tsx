@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useCart } from "./components/useCart";
+import { useCart } from "./useCart";
 
 const addProductToCartFormSchema = z.object({
     code: z
@@ -43,7 +43,8 @@ export default function SellInputs() {
         defaultValues: {
             code: 0,
             amount: 1,
-            productName: ""
+            productName: "",
+            discount: 0
         }
     })
     const { handleSubmit, reset, watch, trigger, setError, setValue, formState : { errors } } = form;
