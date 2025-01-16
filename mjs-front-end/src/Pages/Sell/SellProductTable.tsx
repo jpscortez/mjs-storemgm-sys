@@ -3,6 +3,8 @@ import DataTable from "@/store/DataTable";
 import { parsePrice } from "@/Utils/Functions/parser";
 import { ColumnDef } from "@tanstack/react-table";
 import { useCart } from "./components/useCart";
+import { Button } from "@/components/ui/button";
+import { Trash } from "lucide-react";
 
 const columns: ColumnDef<SoldProduct>[] = [
     {
@@ -43,12 +45,29 @@ const columns: ColumnDef<SoldProduct>[] = [
     },
 ]
 
+function comlumnsWithActions(removeFn: (index: number) => void) {
+    const actionColumn: ColumnDef<SoldProduct> = {
+        id: "actions",
+        cell: ({ row }) => {
+            return (
+                <div className="inline-flex items-end">
+                    <Button size="icon" className="text-red-500 hover:bg-red-500/10" onClick={() => removeFn(row.index)}>
+                        <Trash />
+                    </Button>
+                </div>
+            );
+        }
+    }
+
+    return [...columns, actionColumn]
+}
+
 export default function SellProductTable() {
-    const { products } = useCart()
+    const { products, remove } = useCart()
 
     return (
         <DataTable
-            columns={columns}
+            columns={comlumnsWithActions(remove)}
             data={products}
             onRowDblClick={(r) => console.log(r)}
             className="h-64"
