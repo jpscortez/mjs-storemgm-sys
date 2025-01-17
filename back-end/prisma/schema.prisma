@@ -16,5 +16,37 @@ model Product {
   sellPrice   Decimal @map("sell_price")
   stockAmount Int     @map("stock_amount")
 
+  // A sale can have many products sold (with quantity and discounts)
+  productSold ProductSold[]
+
   @@map("products")
+}
+
+model Sale {
+  code      Int      @id @default(autoincrement()) // Unique identifier for each sale
+  numItems  Int      @map("num_items") // Quantity of the product sold
+  totalPaid Float    @map("total_paid") // Total value of the sale (sum of all products sold in this sale)
+  timestamp DateTime @default(now()) // Date when the sale happened
+  customer  String // Customer name or ID, depending on your use case
+
+  // A sale can have many products sold (with quantity and discounts)
+  productSold ProductSold[]
+
+  @@map("sales")
+}
+
+model ProductSold {
+  id          Int      @id @default(autoincrement()) // Unique identifier for each entry
+  productCode Int      @map("product_code") // Foreign key to Product
+  saleCode    Int      @map("sale_code") // Foreign key to Sale
+  numItems    Int      @map("num_items") // Quantity of the product sold
+  price       Float // Price at the time of sale
+  discount    Float // Discount applied to the product (percentage or fixed value)
+  valuePaid   Float    @map("value_paid") // Total price for this specific product in this sale (quantity * (price - discount))
+  timestamp   DateTime @default(now()) // Date when the sale happened
+
+  product Product @relation(fields: [productCode], references: [code])
+  sale    Sale    @relation(fields: [saleCode], references: [code])
+
+  @@map("products_sold")
 }

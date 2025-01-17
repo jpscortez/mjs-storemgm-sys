@@ -1,8 +1,8 @@
 import z from "zod";
-import { FastifyTypedInstance } from "./types";
-import * as service from "./services/product";
+import { FastifyTypedInstance } from "../types";
+import * as service from "../services/product";
 
-export async function routes(app: FastifyTypedInstance) {
+export async function productRoutes(app: FastifyTypedInstance) {
     app.get("/products", {
         schema: {
             description: "List Products",
