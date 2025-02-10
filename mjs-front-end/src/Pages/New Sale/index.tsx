@@ -5,7 +5,7 @@ import { CircleDollarSign } from "lucide-react";
 import { CartProvider } from "./components/CartProvider";
 import SellConfirmButton from "./components/SellConfirmButton";
 
-export default function SellPage() {
+export default function NewSalePage() {
 
   return (
     <div className="w-full my-6 p-6 rounded-lg bg-slate-50 shadow-xl shadow-slate-300">

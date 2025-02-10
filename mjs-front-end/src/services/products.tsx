@@ -2,7 +2,7 @@ import { Product } from "@/Models/Product";
 import axios from "axios";
 
 export async function getProducts() : Promise<Product[]> {
-    const products = await axios.get("http://localhost:3333/products")
+    const products = await axios.get<Product[]>("http://localhost:3333/products")
         .then(response => response.data)
 
     return products        
@@ -20,7 +20,7 @@ export async function createProduct({ code, name, sellPrice, stockAmount } : Cre
 }
 
 export async function getProduct(code: number) : Promise<Product> {
-    const product = axios.get(`http://localhost:3333/products/${code}`)
+    const product = axios.get<Product>(`http://localhost:3333/products/${code}`)
         .then(response => response.data)
 
     return product

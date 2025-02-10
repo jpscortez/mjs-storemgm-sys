@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import SellPage from "@/Pages/Sell";
+import NewSalePage from "@/Pages/New Sale";
 import Login from "@/Pages/Login";
 import App from "@/App";
 import HomePage from "@/Pages/Home";
 import ProductsPage from "@/Pages/Products";
+import AllSalesPage from "@/Pages/All Sales";
+import SaleDetailPage from "@/Pages/Sale Detail";
 
 export default function Router() {
   return (
@@ -16,7 +18,9 @@ export default function Router() {
           <Route element={<App />}>
             <Route element={<HomePage />} path="/" />
             <Route element={<ProductsPage />} path="/products" />
-            <Route element={<SellPage />} path="/sell" />
+            <Route element={<NewSalePage />} path="/sales/new" />
+            <Route element={<AllSalesPage />} path="/sales" />
+            <Route element={<SaleDetailPage />} path="/sales/:saleId" />
           </Route>
         </Route>
       </Routes>

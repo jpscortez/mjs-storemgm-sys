@@ -1,0 +1,25 @@
+import { SaleDTO } from "@/Models/SaleDTO";
+import { Sale } from "@/Models/Sale";
+import axios from "axios";
+import { SaleDetail } from "@/Models/SaleDetail";
+
+export async function registerSale({ products, totalPaid, numItems }: SaleDTO) {
+
+    await axios.post("http://localhost:3333/sales", { products, totalPaid, numItems })
+}
+
+export async function getSales() : Promise<Sale[]> {
+    const sales = await axios.get<Sale[]>("http://localhost:3333/sales")
+        .then(response => response.data)
+
+    return sales
+}
+
+export async function getSale(saleId: number) : Promise<SaleDetail> {
+    
+    const sale = await axios.get<SaleDetail>(`http://localhost:3333/sales/${saleId}`)
+        .then(response => response.data)
+
+    return sale
+
+}

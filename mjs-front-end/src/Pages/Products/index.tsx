@@ -1,6 +1,6 @@
 import ProductsTable from "./components/ProductsTable"
 import { AddProductDialog } from "./components/AddProductDialog"
-import { getProducts } from "@/data/products"
+import { getProducts } from "@/services/products"
 import { useQuery } from "@tanstack/react-query"
 import { PackageOpen } from "lucide-react"
 

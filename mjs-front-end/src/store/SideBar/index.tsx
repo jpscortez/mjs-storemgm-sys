@@ -1,9 +1,7 @@
 import SideBarItem from "./SideBarItem"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/Utils/Hooks/UseAuth"
-import { CircleDollarSign, Home, PackageOpen } from "lucide-react"
-
-
+import { CircleDollarSign, Home, PackageOpen, ShoppingBag } from "lucide-react"
 
 export default function SideBarRoot() {
     const { logout } = useAuth()
@@ -15,7 +13,8 @@ export default function SideBarRoot() {
 
                 <SideBarItem icon={Home} caption="Início" to="/" />
                 <SideBarItem icon={PackageOpen} caption="Produtos" to="/products" />
-                <SideBarItem icon={CircleDollarSign} caption="Venda" to="/sell" />
+                <SideBarItem icon={ShoppingBag} caption="Nova Venda" to="/sales/new" />
+                <SideBarItem icon={CircleDollarSign} caption="Minhas Vendas" to="/sales" />
             </div>
 
             <div>

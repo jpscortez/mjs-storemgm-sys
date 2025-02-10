@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { getProduct } from "@/data/products";
+import { getProduct } from "@/services/products";
 import { SoldProduct } from "@/Models/Product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";

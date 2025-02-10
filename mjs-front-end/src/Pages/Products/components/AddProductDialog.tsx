@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createProduct } from "@/data/products";
+import { createProduct } from "@/services/products";
 import { useToast } from "@/hooks/useToast";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";

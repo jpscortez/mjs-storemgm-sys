@@ -1,13 +1,13 @@
 export type SaleDTO = {
     products: SaleProductDTO[],
-    total: number,
-    amount: number
+    totalPaid: number,
+    numItems: number
 }
 
 export type SaleProductDTO = {
     code: string,
-    amount: number,
+    numItems: number,
     discount: number,
     price: number,
-    total: number
+    valuePaid: number
 }

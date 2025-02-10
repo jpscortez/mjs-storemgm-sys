@@ -1,3 +1,4 @@
 import { RegisterSale } from "./register-sale";
-
-export { RegisterSale }
+import { GetAllSales } from "./get-sales";
+import { GetSale } from "./get-sale-by-id";
+export { RegisterSale, GetAllSales, GetSale }

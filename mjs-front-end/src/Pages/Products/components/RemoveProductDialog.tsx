@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { deleteProduct } from "@/data/products";
+import { deleteProduct } from "@/services/products";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";
 import { useMutation } from "@tanstack/react-query";

@@ -1,4 +1,6 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { prismaClient } from "../../database/prisma-client"
+import { number } from "zod"
 
 interface RegisterSaleProps {
     numItems: number
@@ -15,7 +17,8 @@ interface RegisterSaleProps {
 async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps) {
 
     if(products == undefined || products.length == 0) {
-        throw new Error("Cannot register Sale with no Products")
+        console.log("Cannot register Sale with no Products")
+        return
     }
 
     await prismaClient.$transaction(async (pClient) => {
@@ -29,16 +32,26 @@ async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps)
             },
         });
 
+        const productAmountLeft: {[key: number]: number} = {}
+
         // Check if stock is sufficient for each product
-        for (const { code, numItems } of products) {
-            const product = productsFound.find(p => p.code === code);
+        for (const pSold of products) {
+            const product = productsFound.find(p => p.code === pSold.code);
 
             if(!product) {
-                throw new Error(`Product with code ${code} not found.`);
+                throw new Error(`Product with code ${pSold.code} not found.`);
+            }
+            const code = pSold.code
+
+            if(!productAmountLeft[code]) {
+                productAmountLeft[code] = product.stockAmount
             }
 
-            if (product.stockAmount < numItems) {
+            if (productAmountLeft[code] < pSold.numItems) {
                 throw new Error(`Insufficient stock for product ${code}.`);
+            }
+            else {
+                productAmountLeft[code] -= pSold.numItems
             }
         }
 

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "./useCart";
 import { SaleDTO } from "@/Models/SaleDTO";
 import { useMutation } from "@tanstack/react-query";
-import { registerSale } from "@/data/sell";
+import { registerSale } from "@/services/sell";
 import { LoaderCircle } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
 
@@ -29,11 +29,11 @@ export default function SellConfirmButton() {
         const sale = products.reduce((acc, { code, amount, discount, price }) => {
             const productTotal = amount * (price - discount);
 
-            acc.total += productTotal;
-            acc.amount += amount;
-            acc.products.push({ code, amount, discount, price, total: productTotal });
+            acc.totalPaid += productTotal;
+            acc.numItems += amount;
+            acc.products.push({ code, numItems: amount, discount, price, valuePaid: productTotal });
             return acc;
-        }, { total: 0, products: [], amount: 0 } as SaleDTO)
+        }, { totalPaid: 0, products: [], numItems: 0 } as SaleDTO)
 
         await registerSaleFn(sale)
     }
