@@ -5,15 +5,17 @@ import { useMutation } from "@tanstack/react-query";
 import { registerSale } from "@/services/sell";
 import { LoaderCircle } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
+import { useNavigate } from "react-router-dom";
 
 export default function SellConfirmButton() {
     const { products, isEmpty, reset } = useCart()
     const { toast } = useToast()
+    const navigate = useNavigate()
 
     const { mutateAsync: registerSaleFn, isPending } = useMutation({
         mutationFn: registerSale,
-        onSuccess: () => {
-            console.log("Trigger offer to export excel...")
+        onSuccess: ({ code: newSaleCode }) => {
+            navigate(`/sales/${newSaleCode}`)
 
             toast({
                 variant: 'default',

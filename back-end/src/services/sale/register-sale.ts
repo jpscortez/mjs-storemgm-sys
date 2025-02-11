@@ -14,12 +14,12 @@ interface RegisterSaleProps {
     }[]
 }
 
-async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps) {
+async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps): Promise<number> {
 
     if(products == undefined || products.length == 0) {
-        console.log("Cannot register Sale with no Products")
-        return
+        throw new Error("Cannot register Sale with no Products");
     }
+    let newSaleCode: number = -1
 
     await prismaClient.$transaction(async (pClient) => {
 
@@ -56,7 +56,7 @@ async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps)
         }
 
         // Register Sale
-        await pClient.sale.create({
+        const data = await pClient.sale.create({
             data: {
                 numItems,
                 totalPaid,
@@ -74,6 +74,7 @@ async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps)
                 }
             }
         })
+        newSaleCode = data.code
 
         // Update stock for each product one by one
         for (const { code, numItems } of products) {
@@ -90,6 +91,8 @@ async function RegisterSale({numItems, totalPaid, products} : RegisterSaleProps)
             }
         }
     })
+
+    return newSaleCode
 }
 
 export { RegisterSale }

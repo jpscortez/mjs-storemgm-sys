@@ -19,14 +19,18 @@ export async function salesRoutes(app: FastifyTypedInstance) {
                 }))
             }),
             response: {
-                201: z.null().describe("Sale registered!") 
+                201: z.object(
+                    {
+                        code: z.number().int()
+                    }
+                ).describe("Sale registered!") 
             }
         }
     }, async (response, reply) => {
         const { numItems, totalPaid, products } = response.body
 
-        await service.RegisterSale({ numItems, totalPaid, products })
-        return reply.code(201).send()
+        const code = await service.RegisterSale({ numItems, totalPaid, products })
+        return reply.code(201).send({code})
 
     })
 
