@@ -13,8 +13,8 @@ export default function SideBarRoot() {
 
                 <SideBarItem icon={Home} caption="Início" to="/" />
                 <SideBarItem icon={PackageOpen} caption="Produtos" to="/products" />
-                <SideBarItem icon={ShoppingBag} caption="Nova Venda" to="/sales/new" />
-                <SideBarItem icon={CircleDollarSign} caption="Minhas Vendas" to="/sales" />
+                <SideBarItem icon={CircleDollarSign} caption="Minhas Vendas" to="/sales" end/>
+                <SideBarItem icon={ShoppingBag} caption="Nova Venda" to="/new-sale"/>
             </div>
 
             <div>

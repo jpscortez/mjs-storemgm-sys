@@ -7,14 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useCart } from "./useCart";
+import { useCart } from "../useCart";
 
 const addProductToCartFormSchema = z.object({
     code: z
-        .coerce
-        .number({ invalid_type_error: "Apenas números.", required_error: "Informe o código." })
-        .int("Apenas númeors inteiros.")
-        .positive(),
+        .string()
+        .refine(val => val !== null, { message: "Campo obrigatório." })
+        .refine(val => Number.isInteger(Number.parseInt(val)), "Apenas números inteiros.")
+        .refine(val => Number.isInteger(Number.parseInt(val)) && Number.parseInt(val) > 0, "Código invalido"),
     productName: z.string().min(1),
     amount: z
         .coerce
@@ -30,18 +30,18 @@ const addProductToCartFormSchema = z.object({
         .number()
 }).refine((data) => !data.maxAmount || data.maxAmount >= data.amount, {
     message: 'Quantidade maior que em estoque',
-    path: ['amount'], // This sets the error path to minDate field
+    path: ['amount'],
   });
 
 type addProductToCartFormData = z.infer<typeof addProductToCartFormSchema>
 
-export default function SellInputs() {
+export default function CartInputs() {
     const { addProduct } = useCart()
 
     const form = useForm<addProductToCartFormData>({
         resolver: zodResolver(addProductToCartFormSchema),
         defaultValues: {
-            code: 0,
+            code: "",
             amount: 1,
             productName: "",
             discount: 0
@@ -66,7 +66,7 @@ export default function SellInputs() {
     const codeChanged = watch("code")
     useEffect(() => {
         if(codeChanged) {
-            getProduct(codeChanged)
+            getProduct(Number.parseInt(codeChanged))
                 .then((p) => {
                     setValue("productName", p.name)
                     setValue("price", p.sellPrice)

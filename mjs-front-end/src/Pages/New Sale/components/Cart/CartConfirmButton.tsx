@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { useCart } from "./useCart";
+import { useCart } from "../useCart";
 import { SaleDTO } from "@/Models/SaleDTO";
 import { useMutation } from "@tanstack/react-query";
 import { registerSale } from "@/services/sell";
 import { LoaderCircle } from "lucide-react";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/Utils/Hooks/useToast";
 import { useNavigate } from "react-router-dom";
 
-export default function SellConfirmButton() {
+export default function CartConfirmButton() {
     const { products, isEmpty, reset } = useCart()
     const { toast } = useToast()
     const navigate = useNavigate()

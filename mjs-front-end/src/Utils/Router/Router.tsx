@@ -21,8 +21,8 @@ export default function Router() {
             <Route element={<ProductsPage />} path="/products" />
             <Route element={<TestPage />} path="/test" />
             <Route element={<AllSalesPage />} path="/sales" />
-            <Route element={<NewSalePage />} path="/sales/new" />
             <Route element={<SaleDetailPage />} path="/sales/:saleId" />
+            <Route element={<NewSalePage />} path="/new-sale" />
           </Route>
         </Route>
       </Routes>

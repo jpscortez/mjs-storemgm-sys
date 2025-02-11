@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, Dialo
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createProduct } from "@/services/products";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/Utils/Hooks/useToast";
 import { Product } from "@/Models/Product";
 import { queryClient } from "@/Utils/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";

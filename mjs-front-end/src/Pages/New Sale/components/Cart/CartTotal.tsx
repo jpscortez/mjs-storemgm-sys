@@ -1,8 +1,8 @@
 import { parsePrice } from "@/Utils/Functions/parser"
-import { useCart } from "./useCart"
+import { useCart } from "../useCart"
 
 
-export default function SellTotal() {
+export default function CartTotal() {
     const { products } = useCart()
 
     return (

@@ -2,7 +2,7 @@ import { SoldProduct } from "@/Models/Product";
 import DataTable from "@/components/DataTable";
 import { parsePrice } from "@/Utils/Functions/parser";
 import { ColumnDef } from "@tanstack/react-table";
-import { useCart } from "./useCart";
+import { useCart } from "../useCart";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
@@ -62,7 +62,7 @@ function comlumnsWithActions(removeFn: (index: number) => void) {
     return [...columns, actionColumn]
 }
 
-export default function SellProductTable() {
+export default function CartProductTable() {
     const { products, remove } = useCart()
 
     return (
