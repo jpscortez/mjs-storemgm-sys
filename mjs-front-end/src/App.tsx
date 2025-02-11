@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import SideBarRoot from "./store/SideBar"
+import SideBarRoot from "./components/SideBar"
 
 function App() {
 

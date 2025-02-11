@@ -7,6 +7,7 @@ import HomePage from "@/Pages/Home";
 import ProductsPage from "@/Pages/Products";
 import AllSalesPage from "@/Pages/All Sales";
 import SaleDetailPage from "@/Pages/Sale Detail";
+import TestPage from "@/Pages/Test";
 
 export default function Router() {
   return (
@@ -18,8 +19,9 @@ export default function Router() {
           <Route element={<App />}>
             <Route element={<HomePage />} path="/" />
             <Route element={<ProductsPage />} path="/products" />
-            <Route element={<NewSalePage />} path="/sales/new" />
+            <Route element={<TestPage />} path="/test" />
             <Route element={<AllSalesPage />} path="/sales" />
+            <Route element={<NewSalePage />} path="/sales/new" />
             <Route element={<SaleDetailPage />} path="/sales/:saleId" />
           </Route>
         </Route>

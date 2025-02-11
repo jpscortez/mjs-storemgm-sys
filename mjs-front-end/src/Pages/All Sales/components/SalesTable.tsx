@@ -1,4 +1,4 @@
-import DataTable from "@/store/DataTable"
+import DataTable from "@/components/DataTable"
 import { columns } from "./SalesTableColumns"
 import { Sale } from "@/Models/Sale"
 import { useNavigate } from "react-router-dom";

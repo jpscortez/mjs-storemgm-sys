@@ -1,5 +1,5 @@
 import { SoldProduct } from "@/Models/Product";
-import DataTable from "@/store/DataTable";
+import DataTable from "@/components/DataTable";
 import { parsePrice } from "@/Utils/Functions/parser";
 import { ColumnDef } from "@tanstack/react-table";
 import { useCart } from "./useCart";

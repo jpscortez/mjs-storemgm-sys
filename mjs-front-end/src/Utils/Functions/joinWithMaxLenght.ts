@@ -1,6 +1,6 @@
 export function joinWithMaxLength(stringList: string[], maxLength: number) {
     // Join the strings together
-    let result = stringList.join(' ');
+    let result = stringList.join(', ');
   
     // Check if the length exceeds maxLength
     if (result.length > maxLength) {

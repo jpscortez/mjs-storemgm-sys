@@ -3,6 +3,8 @@ import { AddProductDialog } from "./components/AddProductDialog"
 import { getProducts } from "@/services/products"
 import { useQuery } from "@tanstack/react-query"
 import { PackageOpen } from "lucide-react"
+import Page from "@/components/Page"
+import MyCard from "@/components/Card"
 
 export default function ProductsPage() {
   const { data: products, isLoading } = useQuery({
@@ -11,23 +13,22 @@ export default function ProductsPage() {
   })
 
   return (
-    <div className="w-full my-6 p-6 rounded-lg bg-slate-50 shadow-xl shadow-slate-300">
-      <div className="grid">
-        <div className="inline-flex justify-between">
-          <h3 className="inline-flex items-center gap-2 text-2xl">
-            <PackageOpen />
-            <span>
-              Produtos
-            </span>
-          </h3>
-          <AddProductDialog />
-        </div>
+    <Page>
+      <MyCard.Root>
+        <MyCard.Header>
+          <MyCard.Title icon={PackageOpen} title="Produtos"></MyCard.Title>
+          <MyCard.Actions>
+            <AddProductDialog />
+          </MyCard.Actions>
+        </MyCard.Header>
+        <MyCard.Content>
         {
           isLoading ? <div>Carregando...</div> :
             <ProductsTable products={products ?? []} />
         }
-      </div>
-    </div>
+        </MyCard.Content>
+      </MyCard.Root>
+    </Page>
 
   )
 }

@@ -1,5 +1,5 @@
 import { Product } from "@/Models/Product"
-import DataTable from "@/store/DataTable"
+import DataTable from "@/components/DataTable"
 import { columns } from "./ProductsTableColumns"
 
 interface ProductsTableProps {
