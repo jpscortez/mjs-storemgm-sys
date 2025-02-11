@@ -6,7 +6,7 @@ type CardContentProps = {
 
 export function CardContent({ children }: CardContentProps) {
     return (
-        <div className="grid">
+        <div className="grid gap-2">
             {children}
         </div>
     )

@@ -34,17 +34,27 @@ export default function SaleDetailPage() {
           <MyCard.Content>
             <div>
               <p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' hh:mm")}</p>
-              <p>Items Vendidos: {sale!.numItems}</p>
-              <p>Total Pago: {parsePrice(sale!.totalPaid)}</p>
             </div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="outline rounded bg-slate-700">
+              <div className="p-2 grid grid-cols-5 gap-2">
+                <p className="col-span-2 text-white">Produto</p>
+                <p className="text-end text-white">Preço UN</p>
+                <p className="text-end text-white">Quantidade</p>
+                <p className="text-end text-white">Subtotal</p>
+              </div>
               {sale!.products.map((product, index) => (
-                <div key={`soldProducts-${saleId}-${index}`} className="p-2 outline rounded">
-                  <p>Amount: {product.numItem}</p>
-                  <p>Produto: {product.name}</p>
-                  <p>Total: {parsePrice(product.totalPaid)}</p>
+                <div className="p-2 col-span-5 grid grid-cols-5 gap-2 bg-slate-50">
+                  <p className="col-span-2" key={`soldProducts-${saleId}-Produto-${index}`}>{product.name}</p>
+                  <p className="text-end" key={`soldProducts-${saleId}-PreçoUn-${index}`}>{parsePrice(product.price)}</p>
+                  <p className="text-end" key={`soldProducts-${saleId}-Amount-${index}`}>{product.numItems}</p>
+                  <p className="text-end" key={`soldProducts-${saleId}-Total-${index}`}>{parsePrice(product.totalPaid)}</p>
                 </div>
               ))}
+              <div className="p-2 grid grid-cols-5 gap-2">
+                <p className="col-span-3 text-white">TOTAL</p>
+                <p className="text-end text-white">{sale!.numItems}</p>
+                <p className="text-end text-white">{parsePrice(sale!.totalPaid)}</p>
+              </div>
             </div>
           </MyCard.Content>
         </MyCard.Root>

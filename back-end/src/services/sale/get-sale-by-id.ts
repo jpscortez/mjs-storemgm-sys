@@ -22,10 +22,11 @@ export async function GetSale(code: number) {
             totalPaid: total,
             numItems: nItems,
             timestamp,
-            products: productSold.map(({product, numItems: productNumItems, valuePaid: totalPaid}) => {
+            products: productSold.map(({product, numItems: productNumItems, valuePaid: totalPaid, price}) => {
                 return {
                     name: product.name,
                     numItems: productNumItems,
+                    price,
                     totalPaid
                 }
             })

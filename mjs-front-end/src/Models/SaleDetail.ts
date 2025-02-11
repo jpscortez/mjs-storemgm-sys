@@ -9,6 +9,7 @@ export type SaleDetail = {
 
 export type SoldProductSaleDetail = {
     name: string,
-    numItem: number,
+    numItems: number,
+    price: number,
     totalPaid: number
 }

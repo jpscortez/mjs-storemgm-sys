@@ -2,12 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getProduct } from "@/services/products";
-import { SoldProduct } from "@/Models/Product";
+import { Product, SoldProduct } from "@/Models/Product";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useCart } from "../useCart";
+import { parsePrice } from "@/Utils/Functions/parser";
 
 const addProductToCartFormSchema = z.object({
     code: z
@@ -37,6 +38,7 @@ type addProductToCartFormData = z.infer<typeof addProductToCartFormSchema>
 
 export default function CartInputs() {
     const { addProduct } = useCart()
+    const [product, setProduct] = useState<Product>()
 
     const form = useForm<addProductToCartFormData>({
         resolver: zodResolver(addProductToCartFormSchema),
@@ -50,20 +52,22 @@ export default function CartInputs() {
     const { handleSubmit, reset, watch, trigger, setError, setValue, formState : { errors } } = form;
 
     const onSubmit = (data: addProductToCartFormData) => {
-        const { amount, code: codeStr, productName: name, discount, price } = data
+        const { amount, code: codeStr, productName: name, price } = data
         const code = Number(codeStr);
 
         addProduct({
             name,
             amount,
             code: code.toString(),
-            discount,
+            discount: 0,
             price
         } as SoldProduct)
 
         reset({})
+        setProduct(undefined)
     }
     const codeChanged = watch("code")
+
     useEffect(() => {
         if(codeChanged) {
             getProduct(Number.parseInt(codeChanged))
@@ -71,6 +75,7 @@ export default function CartInputs() {
                     setValue("productName", p.name)
                     setValue("price", p.sellPrice)
                     setValue("maxAmount", p.stockAmount)
+                    setProduct(p)
                     trigger()
                 })
                 .catch(() => {
@@ -79,15 +84,16 @@ export default function CartInputs() {
                     setValue("maxAmount", undefined)
                     setError("code", {type: "manual", message:"Código de produto não encontrado"})
                     setError("productName", {type: "manual"})
+                    setProduct(undefined)
                 })
         }
     }, [codeChanged, setError, setValue, trigger])
 
     return (
-        <div>
-            <Form {...form}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex gap-2 items-end">
+        <Form {...form}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid grid-cols-5 gap-2 items-end">
+                    <>
                         <FormField
                             control={form.control}
                             name="code"
@@ -105,25 +111,6 @@ export default function CartInputs() {
                         />
                         <FormField
                             control={form.control}
-                            name="productName"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Produto</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            disabled
-                                            className="uppercase"
-                                            type="string"
-                                            placeholder=""
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                </FormItem>
-
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
                             name="amount"
                             render={({ field }) => (
                                 <FormItem>
@@ -136,37 +123,51 @@ export default function CartInputs() {
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="discount"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>DESCONTO</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="number" placeholder="" className="remove-arrow"
-                                            {...field} />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        />
-                        <div className="flex-1" />
-
+                        <div className="col-span-2" />
                         <Button
                             variant="filled"
                             type="submit"
                         >
                             ADICIONAR
                         </Button>
-                    </div>
-                </form>
-            </Form>
-            <div className="error-messages">
-                {errors.code && <p className="text-red-900 italic text-sm">{errors.code.message}</p>}
-                {errors.productName && <p className="text-red-900 italic text-sm">{errors.productName.message}</p>}
-                {errors.amount && <p className="text-red-900 italic text-sm">{errors.amount.message}</p>}
-                {errors.discount && <p className="text-red-900 italic text-sm">{errors.discount.message}</p>}
-            </div>
-        </div>
+                    </>
+                    <>
+                        <div className="inline-flex col-span-5">
+                            <div className="h-0 p-0 overflow-visible inline-flex items-center">
+                                {errors.code && <p className="text-red-900 italic text-sm">{errors.code.message}</p>}
+                                {errors.productName && <p className="text-red-900 italic text-sm">{errors.productName.message}</p>}
+                                {errors.amount && <p className="text-red-900 italic text-sm">{errors.amount.message}</p>}
+                                {errors.discount && <p className="text-red-900 italic text-sm">{errors.discount.message}</p>}
+                            </div>
+                        </div>
+                    </>
+                    <>
+                        <div className="grid col-span-2">
+                            <p>PRODUTO</p>
+                            <i className="font-thin text-sm">{product ? product.name : "Procure um produto pelo código"}</i>
+                        </div>
+                        <div className="grid text-end">
+                            <p></p>
+                            <i className="font-thin text-sm">
+                                {form.getValues("amount")}
+                            </i>
+                        </div>
+                        <div className="grid text-end">
+                            <p>PREÇO UN</p>
+                            <div className="text-sm inline-flex justify-between">
+                                <p>X</p>
+                                <i className="font-thin text-sm">
+                                    {product ? parsePrice(product.sellPrice) : "-"}
+                                </i>
+                            </div>
+                        </div>
+                        <div className="grid text-end">
+                            <p>SUBTOTAL</p>
+                            <p className="text-sm">{product ? parsePrice(product.sellPrice * form.getValues("amount")) : "-"}</p>
+                        </div>
+                    </>
+                </div>
+            </form>
+        </Form>
     )
 }
