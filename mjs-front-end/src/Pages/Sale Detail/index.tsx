@@ -38,6 +38,8 @@ export default function SaleDetailPage() {
 					<MyCard.Content>
 						<div>
 							<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' hh:mm")}</p>
+							<p>Cliente: {sale!.customer.name}</p>
+							<p>Pagamento: {sale!.paymentMethod}</p>
 						</div>
 						<div className="outline rounded bg-slate-700">
 							<div className="p-2 grid grid-cols-5 gap-2">

@@ -27,10 +27,13 @@ model Sale {
   numItems  Int      @map("num_items") // Quantity of the product sold
   totalPaid Float    @map("total_paid") // Total value of the sale (sum of all products sold in this sale)
   timestamp DateTime @default(now()) // Date when the sale happened
-  customer  String // Customer name or ID, depending on your use case
 
   // A sale can have many products sold (with quantity and discounts)
   productSold ProductSold[]
+
+  payment      Payment?  @relation(name: "payment_to_sale")
+  customerCode Int
+  customer     Customer? @relation(name: "customer_to_sale", fields: [customerCode], references: [code])
 
   @@map("sales")
 }
@@ -49,4 +52,23 @@ model ProductSold {
   sale    Sale    @relation(fields: [saleCode], references: [code])
 
   @@map("products_sold")
+}
+
+model Customer {
+  code Int    @id @default(autoincrement()) // Unique identifier for each entry
+  name String
+
+  Sale Sale[] @relation(name: "customer_to_sale")
+
+  @@map("customers")
+}
+
+model Payment {
+  code   Int    @id @default(autoincrement()) // Unique identifier for each entry
+  method String
+
+  saleCode Int  @unique @map("sale_code")
+  sale     Sale @relation(name: "payment_to_sale", fields: [saleCode], references: [code])
+
+  @@map("payments")
 }

@@ -89,8 +89,7 @@ export function NewSaleProvider({children}: {children: ReactNode}) {
 			{totalPaid: 0, products: [], numItems: 0, customer, paymentMethod: paymentMethodTypedFixed} as SaleDTO
 		);
 
-		console.log(sale);
-		// await registerSaleFn(sale);
+		await registerSaleFn(sale);
 	}
 
 	return (
