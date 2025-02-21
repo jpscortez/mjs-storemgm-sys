@@ -7,7 +7,7 @@ type StepperProps = {
 
 export function Stepper({children}: StepperProps) {
 	return (
-		<div className="w-full">
+		<div className="w-full h-full">
 			<StepperProvider>{children}</StepperProvider>
 		</div>
 	);

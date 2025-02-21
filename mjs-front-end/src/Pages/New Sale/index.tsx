@@ -1,14 +1,14 @@
-import CartInputs from "./components/Cart/CartInputs";
-import CartTotal from "./components/Cart/CartTotal";
-import SellProductTable from "./components/Cart/CartProductTable";
 import {Check, CreditCard, ShoppingBag, ShoppingCart, Users} from "lucide-react";
-import {CartProvider} from "./components/Cart/CartProvider";
-import CartConfirmButton from "./components/Cart/CartConfirmButton";
+import {NewSaleProvider} from "./New Sale Provider/NewSaleProvider";
 import Page from "@/components/Page";
 import MyCard from "@/components/Card";
 import {Stepper} from "@/components/Stepper";
 import {StepperHeader} from "@/components/Stepper/StepperHeader";
 import {StepperContent} from "@/components/Stepper/StepperContent";
+import {Cart} from "./components/Cart";
+import {Customer} from "./components/Customer";
+import {PaymentMethod} from "./components/PaymentMethod";
+import {Review} from "./components/Review";
 
 export default function NewSalePage() {
 	const stepsIcons = [Users, ShoppingCart, CreditCard, Check];
@@ -23,17 +23,14 @@ export default function NewSalePage() {
 					<div className="flex flex-col min-h-96 gap-2">
 						<Stepper>
 							<StepperHeader />
-							<StepperContent stepsIcons={stepsIcons}>
-								<p>content 1</p>
-								<CartProvider>
-									<CartInputs />
-									<SellProductTable />
-									<CartTotal />
-									<CartConfirmButton />
-								</CartProvider>
-								<p>content 3</p>
-								<p>content 4</p>
-							</StepperContent>
+							<NewSaleProvider>
+								<StepperContent stepsIcons={stepsIcons}>
+									<Customer />
+									<Cart />
+									<PaymentMethod />
+									<Review />
+								</StepperContent>
+							</NewSaleProvider>
 						</Stepper>
 					</div>
 				</MyCard.Content>

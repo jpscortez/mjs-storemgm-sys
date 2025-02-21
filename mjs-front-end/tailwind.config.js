@@ -27,6 +27,20 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.shark-teeth-bottom': {
+          position: 'absolute',
+          left: '0',
+          bottom: '0',
+          width: '100%',
+          height: '4rem', /* Adjust the height for the shark teeth */
+          backgroundColor: '#FFF', /* Same color as the div */
+          clipPath: 'polygon(0 100%, 2.5% 80%, 5% 100%, 7.5% 80%, 10% 100%, 12.5% 80%, 15% 100%, 17.5% 80%, 20% 100%, 22.5% 80%, 25% 100%, 27.5% 80%, 30% 100%, 32.5% 80%, 35% 100%, 37.5% 80%, 40% 100%, 42.5% 80%, 45% 100%, 47.5% 80%, 50% 100%, 52.5% 80%, 55% 100%, 57.5% 80%, 60% 100%, 62.5% 80%, 65% 100%, 67.5% 80%, 70% 100%, 72.5% 80%, 75% 100%, 77.5% 80%, 80% 100%, 82.5% 80%, 85% 100%, 87.5% 80%, 90% 100%, 92.5% 80%, 95% 100%, 97.5% 80%, 100% 100%)', /* Quadrupled the frequency of teeth */
+        },
+      });
+    },
+  ],
 }
 

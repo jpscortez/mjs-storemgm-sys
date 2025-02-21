@@ -1,15 +1,14 @@
 import React, {ReactNode, useEffect} from "react";
 import {useStepper} from "./useStepper";
-import {Button} from "../ui/button";
 import {LucideIcon} from "lucide-react";
 
-type StepperContetProps = {
+type StepperContentProps = {
 	children: ReactNode;
 	stepsIcons: LucideIcon[];
 };
 
-export function StepperContent({stepsIcons, children}: StepperContetProps) {
-	const {step, setSteps, previousStep, nextStep} = useStepper();
+export function StepperContent({stepsIcons, children}: StepperContentProps) {
+	const {step, setSteps} = useStepper();
 
 	useEffect(() => {
 		setSteps(
@@ -20,12 +19,8 @@ export function StepperContent({stepsIcons, children}: StepperContetProps) {
 	}, [setSteps, stepsIcons]);
 
 	return (
-		<div className="py-4">
-			<div>{React.Children.toArray(children)[step] || null}</div>
-			<div>
-				<Button onClick={previousStep}>previous</Button>
-				<Button onClick={nextStep}>next</Button>
-			</div>
+		<div className="py-4 h-full flex flex-col">
+			<div className="flex-1">{React.Children.toArray(children)[step] || null}</div>
 		</div>
 	);
 }
