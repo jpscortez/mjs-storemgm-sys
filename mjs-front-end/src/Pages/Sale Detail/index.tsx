@@ -1,12 +1,14 @@
 import MyCard from "@/components/Card";
 import Page from "@/components/Page";
-import {getSale} from "@/services/sell";
+import {getSale} from "@/services/sale";
 import {useQuery} from "@tanstack/react-query";
 import {format} from "date-fns";
 import {CircleDollarSign, LoaderCircle} from "lucide-react";
 import {Navigate, useParams} from "react-router-dom";
 import SaleDetailProductsTable from "./components/SaleDetailProductsTable";
 import {formatPrice} from "@/Utils/Functions/parser";
+import {SaleDetailPrintContent} from "./components/SaleDetailPrintContent";
+import {PrintableContent} from "@/components/PrintableContent";
 
 export default function SaleDetailPage() {
 	const {saleId} = useParams();
@@ -34,6 +36,9 @@ export default function SaleDetailPage() {
 			<MyCard.Root>
 				<MyCard.Header>
 					<MyCard.Title title="Detalhes da venda" icon={CircleDollarSign}></MyCard.Title>
+					<MyCard.Actions>
+						<PrintableContent content={<SaleDetailPrintContent sale={sale!} />} />
+					</MyCard.Actions>
 				</MyCard.Header>
 				<MyCard.Content>
 					<div>

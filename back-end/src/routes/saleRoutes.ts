@@ -89,6 +89,7 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 						timestamp: z.date(),
 						products: z.array(
 							z.object({
+								code: z.number().int(),
 								name: z.string(),
 								numItems: z.number().int(),
 								price: z.number(),
@@ -98,6 +99,9 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 						customer: z.object({
 							code: z.number().int(),
 							name: z.string(),
+							phoneNumber: z.string().optional(),
+							address: z.string().optional(),
+							identification: z.string().optional(),
 						}),
 						paymentMethod: z.string(),
 					}),

@@ -24,6 +24,9 @@ export default {
         "dark-700": "#475C7F",
         "dark-800": "#324462",
         "dark-900": "#202E45",
+      },
+      screens: {
+        print: { raw: 'print' },
       }
     },
   },

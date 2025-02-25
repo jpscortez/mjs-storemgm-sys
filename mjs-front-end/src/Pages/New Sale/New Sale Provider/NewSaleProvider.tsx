@@ -1,7 +1,7 @@
 import {PaymentMethodType} from "@/Models/PaymentMethod";
 import {SoldProduct} from "@/Models/Product";
 import {SaleDTO} from "@/Models/SaleDTO";
-import {registerSale} from "@/services/sell";
+import {registerSale} from "@/services/sale";
 import {useToast} from "@/Utils/Hooks/useToast";
 import {useMutation} from "@tanstack/react-query";
 import {createContext, ReactNode, useEffect, useState} from "react";

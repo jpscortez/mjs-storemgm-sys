@@ -21,12 +21,7 @@ export async function GetSale(code: number) {
 						method: true,
 					},
 				},
-				customer: {
-					select: {
-						code: true,
-						name: true,
-					},
-				},
+				customer: true,
 			},
 		})
 		.then(({code, totalPaid: total, numItems: nItems, timestamp, productSold, customer, payment}) => {
@@ -35,16 +30,25 @@ export async function GetSale(code: number) {
 				totalPaid: total,
 				numItems: nItems,
 				timestamp,
-				customer: customer!,
+				customer: {
+					code: customer!.code,
+					name: customer!.name,
+					...(customer!.phoneNumber && {phoneNumber: customer!.phoneNumber}),
+					...(customer!.address && {address: customer!.address}),
+					...(customer!.identification && {identification: customer!.identification}),
+				},
 				paymentMethod: payment!.method,
-				products: productSold.map(({product, numItems: productNumItems, valuePaid: totalPaid, price}) => {
-					return {
-						name: product.name,
-						numItems: productNumItems,
-						price,
-						totalPaid,
-					};
-				}),
+				products: productSold.map(
+					({productCode, product, numItems: productNumItems, valuePaid: totalPaid, price}) => {
+						return {
+							code: productCode,
+							name: product.name,
+							numItems: productNumItems,
+							price,
+							totalPaid,
+						};
+					}
+				),
 			};
 		});
 
