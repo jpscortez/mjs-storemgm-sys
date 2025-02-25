@@ -11,7 +11,7 @@ export const columns: ColumnDef<Sale>[] = [
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy h:mm");
+			return format(date, "dd/MM/yyy HH:mm");
 		},
 	},
 	{
