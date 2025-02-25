@@ -58,7 +58,11 @@ model Customer {
   code Int    @id @default(autoincrement()) // Unique identifier for each entry
   name String
 
-  Sale Sale[] @relation(name: "customer_to_sale")
+  purchases Sale[] @relation(name: "customer_to_sale")
+
+  phoneNumber    String? @map("phone_number")
+  address        String?
+  identification String?
 
   @@map("customers")
 }

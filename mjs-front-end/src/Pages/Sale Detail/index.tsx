@@ -37,7 +37,7 @@ export default function SaleDetailPage() {
 					</MyCard.Header>
 					<MyCard.Content>
 						<div>
-							<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' hh:mm")}</p>
+							<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' HH:mm")}</p>
 							<p>Cliente: {sale!.customer.name}</p>
 							<p>Pagamento: {sale!.paymentMethod}</p>
 						</div>
