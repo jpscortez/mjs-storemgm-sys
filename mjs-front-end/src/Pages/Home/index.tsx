@@ -1,18 +1,13 @@
 import Page from "@/components/Page";
-import { ShoppingBasket } from "lucide-react";
-import { Link } from "react-router-dom";
+import {ShoppingBasket} from "lucide-react";
+import {HomePageShortCutBtn} from "./components/HomePageShortCutBtn";
 
 export default function HomePage() {
-  return (
-    <Page>
-      <Link to="/new-sale">
-        <div className="size-40 p-6 shadow-2xl rounded-lg bg-slate-50 hover:border hover:border-dark-200 active:bg-slate-100">
-          <span className="font-bold uppercase">Nova Venda</span>
-          <div>
-            <ShoppingBasket className="mx-auto" size={80} />
-          </div>
-        </div>
-      </Link>
-    </Page>
-  )
+	return (
+		<Page>
+			<div className="grid grid-cols-6 gap-4">
+				<HomePageShortCutBtn to="/new-sale" caption="Nova Venda" icon={ShoppingBasket} />
+			</div>
+		</Page>
+	);
 }
