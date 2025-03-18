@@ -10,6 +10,7 @@ import SaleDetailPage from "@/Pages/Sale Detail";
 import TestPage from "@/Pages/Test";
 import CustomersPage from "@/Pages/Customers";
 import CustomerDetailPage from "@/Pages/Customer Detail";
+import DashboardPage from "@/Pages/Dashboard";
 
 export default function Router() {
 	return (
@@ -20,6 +21,7 @@ export default function Router() {
 				<Route element={<ProtectedRoutes />}>
 					<Route element={<App />}>
 						<Route element={<HomePage />} path="/" />
+						<Route element={<DashboardPage />} path="/dashboard" />
 						<Route element={<ProductsPage />} path="/products" />
 						<Route element={<TestPage />} path="/test" />
 						<Route element={<AllSalesPage />} path="/sales" />
