@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
     "create-migration-dev": "npx prisma migrate dev",
-    "open-prisma-dev": "npx prisma studio"
+    "prisma:open": "npx prisma studio",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate deploy",
+    "build": "tsc",
+    "start:prod": "node dist/server.js"
   },
   "keywords": [],
   "author": "",

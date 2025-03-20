@@ -4,7 +4,7 @@ import axios from "axios";
 
 export async function getCustomerByCode(code: number): Promise<CustomerDetailDTO> {
 	const customer = axios
-		.get<CustomerDetailDTO>(`http://localhost:3333/customers/${code}`)
+		.get<CustomerDetailDTO>(`${import.meta.env.VITE_BACKEND_API}/customers/${code}`)
 		.then((response) => response.data);
 
 	return customer;
@@ -24,7 +24,7 @@ export async function patchCustomerComplements({
 	identification,
 }: PatchCustomerComplementsRequest): Promise<void> {
 	axios
-		.patch(`http://localhost:3333/customers/${code}`, {
+		.patch(`${import.meta.env.VITE_BACKEND_API}/customers/${code}`, {
 			...(phoneNumber && {phoneNumber}),
 			...(address && {address}),
 			...(identification && {identification}),
@@ -36,7 +36,7 @@ export async function patchCustomerComplements({
 
 export async function getCustomers(): Promise<CustomerSummaryDTO[]> {
 	const customers = axios
-		.get<CustomerSummaryDTO[]>(`http://localhost:3333/customers`)
+		.get<CustomerSummaryDTO[]>(`${import.meta.env.VITE_BACKEND_API}/customers`)
 		.then((response) => response.data);
 
 	return customers;
@@ -44,7 +44,7 @@ export async function getCustomers(): Promise<CustomerSummaryDTO[]> {
 
 export async function getCustomersByPartialName(partialName: string): Promise<string[]> {
 	const customers = axios
-		.get<string[]>(`http://localhost:3333/customers/autocomplete/${partialName}`)
+		.get<string[]>(`${import.meta.env.VITE_BACKEND_API}/customers/autocomplete/${partialName}`)
 		.then((response) => response.data);
 
 	return customers;

@@ -37,6 +37,10 @@ app.register(productRoutes);
 app.register(salesRoutes);
 app.register(customerRoutes);
 
-app.listen({port: 3333}).then(() => {
-	console.log("HTTP Server Running!");
+app.listen({port: 3333, host: "0.0.0.0"}, (err: Error | null, address: string) => {
+	if (err) {
+		console.error(err);
+		process.exit(1);
+	}
+	console.log(`Fastify listening at ${address}`);
 });
