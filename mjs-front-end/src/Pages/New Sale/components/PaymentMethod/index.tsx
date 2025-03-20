@@ -14,6 +14,7 @@ const paymentMethodSchema = z.object({
 		PaymentMethodType.CreditCard,
 		PaymentMethodType.DebitCard,
 		PaymentMethodType.Pix,
+		PaymentMethodType.OutstandingBalance,
 	]),
 });
 

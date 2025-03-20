@@ -61,6 +61,7 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 							numItems: z.number().int(),
 							timestamp: z.date(),
 							productNames: z.array(z.string()),
+							isOpen: z.boolean(),
 						})
 					),
 				},
@@ -104,6 +105,7 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 							identification: z.string().optional(),
 						}),
 						paymentMethod: z.string(),
+						isOpen: z.boolean(),
 					}),
 				},
 			},

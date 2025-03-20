@@ -50,6 +50,7 @@ export async function customerRoutes(app: FastifyTypedInstance) {
 								numItems: z.number().int(),
 								timestamp: z.date(),
 								totalPaid: z.number(),
+								isOpen: z.boolean(),
 							})
 						),
 					}),

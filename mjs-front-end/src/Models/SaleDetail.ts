@@ -13,6 +13,7 @@ export type SaleDetail = {
 		identification?: string;
 	};
 	paymentMethod: string;
+	isOpen: boolean;
 };
 
 export type SoldProductSaleDetail = {

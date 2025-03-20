@@ -1,7 +1,8 @@
 export type Sale = {
-    saleId: number
-    totalPaid: number,
-    numItems: number,
-    timestamp: Date,
-    productNames: string[]
-}
+	saleId: number;
+	totalPaid: number;
+	numItems: number;
+	timestamp: Date;
+	productNames: string[];
+	isOpen: boolean;
+};

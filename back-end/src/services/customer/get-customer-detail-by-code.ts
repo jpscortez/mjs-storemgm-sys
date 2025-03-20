@@ -38,8 +38,8 @@ export async function GetCustomerDetail(customerCode: number) {
 				...(address && {address}),
 				...(identification && {identification}),
 				missingComplements,
-				purchases: purchases.map(({code, numItems, timestamp, totalPaid}) => {
-					return {code, numItems, timestamp, totalPaid};
+				purchases: purchases.map(({code, numItems, timestamp, totalPaid, isOpen}) => {
+					return {code, numItems, timestamp, totalPaid, isOpen};
 				}),
 			};
 		});

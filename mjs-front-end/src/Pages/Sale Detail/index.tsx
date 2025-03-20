@@ -45,7 +45,8 @@ export default function SaleDetailPage() {
 						<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' HH:mm")}</p>
 						<p>Cliente: {sale!.customer.name}</p>
 						<p>Pagamento: {sale!.paymentMethod}</p>
-						<p>Valor Pago: {formatPrice(sale!.totalPaid)}</p>
+						<p>Total da venda: {formatPrice(sale!.totalPaid)}</p>
+						{sale!.isOpen && <span className="text-red-400 rounded bg-red-100">Valor em aberto</span>}
 					</div>
 					<SaleDetailProductsTable products={sale!.products} />
 				</MyCard.Content>

@@ -14,6 +14,8 @@ interface RegisterSaleProps {
 	paymentMethod: string;
 }
 
+const OutstandingBalance = "A Prazo";
+
 async function RegisterSale({
 	numItems,
 	totalPaid,
@@ -105,8 +107,10 @@ async function RegisterSale({
 						method: paymentMethod,
 					},
 				},
+				isOpen: paymentMethod === OutstandingBalance,
 			},
 		});
+
 		newSaleCode = data.code;
 
 		// Update stock for each product one by one

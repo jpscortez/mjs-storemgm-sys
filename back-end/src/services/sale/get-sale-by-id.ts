@@ -24,7 +24,7 @@ export async function GetSale(code: number) {
 				customer: true,
 			},
 		})
-		.then(({code, totalPaid: total, numItems: nItems, timestamp, productSold, customer, payment}) => {
+		.then(({code, totalPaid: total, numItems: nItems, timestamp, productSold, customer, payment, isOpen}) => {
 			return {
 				saleId: code,
 				totalPaid: total,
@@ -49,6 +49,7 @@ export async function GetSale(code: number) {
 						};
 					}
 				),
+				isOpen,
 			};
 		});
 
