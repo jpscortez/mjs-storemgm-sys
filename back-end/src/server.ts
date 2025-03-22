@@ -12,6 +12,7 @@ import {productRoutes} from "./routes/productRoutes";
 import {salesRoutes} from "./routes/saleRoutes";
 import {customerRoutes} from "./routes/customerRoutes";
 import {dashboardRoutes} from "./routes/dashboardRoutes";
+import {openAccountRoutes} from "./routes/openAccountRoutes";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -38,6 +39,7 @@ app.register(productRoutes);
 app.register(salesRoutes);
 app.register(customerRoutes);
 app.register(dashboardRoutes);
+app.register(openAccountRoutes);
 
 app.listen({port: 3333, host: "0.0.0.0"}, (err: Error | null, address: string) => {
 	if (err) {

@@ -1,16 +1,16 @@
-import {OpenAccountDTO} from "@/Models/OpenAccountDTO";
+import {OpenAccountDashboardDTO} from "@/Models/OpenAccountDashboardDTO";
 import {SalesByPaymentMethodDTO} from "@/Models/SalesByPaymentMethod";
 import axios from "axios";
 
-export async function getOpenAccounts(): Promise<OpenAccountDTO[]> {
+export async function getDashboardOpenAccounts(): Promise<OpenAccountDashboardDTO[]> {
 	const openAccounts = axios
-		.get<OpenAccountDTO[]>(`${import.meta.env.VITE_BACKEND_API}/dashboard/open-accounts`)
+		.get<OpenAccountDashboardDTO[]>(`${import.meta.env.VITE_BACKEND_API}/dashboard/open-accounts`)
 		.then((response) => response.data);
 
 	return openAccounts;
 }
 
-export async function getSalesByPaymentMethod(): Promise<SalesByPaymentMethodDTO[]> {
+export async function getDashboardSalesByPaymentMethod(): Promise<SalesByPaymentMethodDTO[]> {
 	const openAccounts = axios
 		.get<SalesByPaymentMethodDTO[]>(`${import.meta.env.VITE_BACKEND_API}/dashboard/sales-by-payment-method`)
 		.then((response) => response.data);

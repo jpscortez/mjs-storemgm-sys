@@ -1,7 +1,8 @@
 import {PieChart} from "@/components/Charts/PieChart";
 import {ChartConfig} from "@/components/ui/chart";
 import {PaymentMethodType} from "@/Models/PaymentMethod";
-import {getSalesByPaymentMethod} from "@/services/dashboard";
+import {getDashboardSalesByPaymentMethod} from "@/services/dashboard";
+import {deepCopy} from "@/Utils/Functions/deepCopy";
 import {useQuery} from "@tanstack/react-query";
 import {CreditCard} from "lucide-react";
 import {useEffect, useState} from "react";
@@ -55,25 +56,22 @@ const chartConfig = {
 export function SalesByPaymentMethodChartCard() {
 	const {data: sales, isLoading} = useQuery({
 		queryKey: ["dashboard", "salesByPaymentMethod"],
-		queryFn: getSalesByPaymentMethod,
+		queryFn: getDashboardSalesByPaymentMethod,
 	});
 	const [chartData, setChartData] = useState(chartDataDefault);
 
 	useEffect(() => {
 		if (sales) {
-			setChartData(chartDataDefault);
+			const data = deepCopy(chartDataDefault);
 			sales.forEach((s) => {
-				setChartData((old) => {
-					const curr = old.find((cd) => cd.label === s.paymentMethod);
-					if (curr) {
-						curr.total = s.total;
-					}
-					return old;
-				});
+				const curr = data.find((cd) => cd.label === s.paymentMethod);
+				if (curr) {
+					curr.total = s.total;
+				}
 			});
-			setChartData((old) => old.filter((curr) => curr.total > 0));
+			setChartData(data.filter((curr) => curr.total > 0));
 		}
-	}, [sales, chartData]);
+	}, [sales]);
 
 	return (
 		<section className="col-span-3 row-span-2 p-6 shadow-2xl rounded-lg">

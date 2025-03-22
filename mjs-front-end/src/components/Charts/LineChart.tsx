@@ -1,5 +1,5 @@
 import {CartesianGrid, XAxis, YAxis, AreaChart, Area} from "recharts";
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
+import {ChartConfig, ChartContainer, ChartLegend, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
 
 type LineChartProps = {
 	chartConfig: ChartConfig;
@@ -48,6 +48,8 @@ export function LineChart({chartConfig, chartData}: LineChartProps) {
 						stackId="a"
 					/>
 				))}
+
+				<ChartLegend />
 			</AreaChart>
 		</ChartContainer>
 	);

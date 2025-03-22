@@ -13,11 +13,13 @@ export async function GetAllSales() {
 						},
 					},
 				},
+				customer: true,
 			},
 		})
-	).map(({code, totalPaid, numItems, timestamp, productSold, isOpen}) => {
+	).map(({code, totalPaid, numItems, timestamp, productSold, isOpen, customer}) => {
 		return {
-			saleId: code,
+			code,
+			customerName: customer ? customer.name : "",
 			totalPaid,
 			numItems,
 			timestamp,

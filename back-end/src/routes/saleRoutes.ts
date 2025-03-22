@@ -56,8 +56,9 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 				response: {
 					200: z.array(
 						z.object({
-							saleId: z.number().int(),
+							code: z.number().int(),
 							totalPaid: z.number(),
+							customerName: z.string(),
 							numItems: z.number().int(),
 							timestamp: z.date(),
 							productNames: z.array(z.string()),

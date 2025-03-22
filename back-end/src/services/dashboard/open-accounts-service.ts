@@ -23,7 +23,7 @@ export async function GetOpenAccounts() {
 		.then((accountRaw) => {
 			return accountRaw.map(({code, name, purchases}) => {
 				return {
-					clientCode: code,
+					customerCode: code,
 					name,
 					total: purchases.map((p) => p.totalPaid).reduce((total, p) => (total += p), 0),
 				};

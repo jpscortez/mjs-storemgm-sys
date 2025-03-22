@@ -1,7 +1,7 @@
 import SideBarItem from "./SideBarItem";
 import {Button} from "@/components/ui/button";
 import {useAuth} from "@/Utils/Hooks/UseAuth";
-import {LayoutDashboard, CircleDollarSign, Home, PackageOpen, ShoppingBag, Users} from "lucide-react";
+import {LayoutDashboard, CircleDollarSign, Home, PackageOpen, ShoppingBag, Users, Handshake} from "lucide-react";
 
 export default function SideBarRoot() {
 	const {logout} = useAuth();
@@ -17,6 +17,7 @@ export default function SideBarRoot() {
 				<SideBarItem icon={CircleDollarSign} caption="Minhas Vendas" to="/sales" end />
 				<SideBarItem icon={ShoppingBag} caption="Nova Venda" to="/new-sale" />
 				<SideBarItem icon={Users} caption="Clientes" to="/customers" />
+				<SideBarItem icon={Handshake} caption="Quitar contas" to="/open-accounts" />
 			</div>
 
 			<div>

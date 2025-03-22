@@ -1,17 +1,26 @@
 import {format} from "date-fns";
-import {Sale} from "@/Models/Sale";
+import {SaleSummaryDTO} from "@/Models/SaleSummaryDTO";
 import {ColumnDef} from "@tanstack/react-table";
 import {joinWithMaxLength} from "@/Utils/Functions/joinWithMaxLenght";
 import {formatPrice} from "@/Utils/Functions/parser";
 
-export const columns: ColumnDef<Sale>[] = [
+export const columns: ColumnDef<SaleSummaryDTO>[] = [
 	{
 		accessorKey: "timestamp",
 		header: "Data",
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy HH:mm");
+			return format(date, "dd/MM/yyy");
+		},
+	},
+	{
+		accessorKey: "customerName",
+		header: "Cliente",
+		cell: ({row}) => {
+			const customerName: string = row.getValue("customerName");
+
+			return joinWithMaxLength([customerName], 20);
 		},
 	},
 	{

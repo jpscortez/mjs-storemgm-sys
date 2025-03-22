@@ -1,6 +1,6 @@
 import axios from "axios";
 import {SaleDTO} from "@/Models/SaleDTO";
-import {Sale} from "@/Models/Sale";
+import {SaleSummaryDTO} from "@/Models/SaleSummaryDTO";
 import {SaleDetail} from "@/Models/SaleDetail";
 
 export async function registerSale({
@@ -17,9 +17,9 @@ export async function registerSale({
 	return data;
 }
 
-export async function getSales(): Promise<Sale[]> {
+export async function getSales(): Promise<SaleSummaryDTO[]> {
 	const sales = await axios
-		.get<Sale[]>(`${import.meta.env.VITE_BACKEND_API}/sales`)
+		.get<SaleSummaryDTO[]>(`${import.meta.env.VITE_BACKEND_API}/sales`)
 		.then((response) => response.data);
 
 	return sales;

@@ -7,12 +7,12 @@ export async function dashboardRoutes(app: FastifyTypedInstance) {
 		"/dashboard/open-accounts",
 		{
 			schema: {
-				description: "Get Open Accounts",
+				description: "Get Open Accounts for Dashboard",
 				tags: ["Dashboard"],
 				response: {
 					200: z.array(
 						z.object({
-							clientCode: z.number().int(),
+							customerCode: z.number().int(),
 							name: z.string(),
 							total: z.number(),
 						})
@@ -30,7 +30,7 @@ export async function dashboardRoutes(app: FastifyTypedInstance) {
 		"/dashboard/sales-by-payment-method",
 		{
 			schema: {
-				description: "Get Sales By Payment Methods",
+				description: "Get Sales By Payment Methods for Dashboard",
 				tags: ["Dashboard"],
 				response: {
 					200: z.array(

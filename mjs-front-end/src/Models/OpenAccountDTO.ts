@@ -1,5 +1,12 @@
+import {SoldProductSaleDetail} from "./SaleDetail";
+
 export type OpenAccountDTO = {
-	customerCode: string;
+	code: number;
 	name: string;
 	total: number;
+	products: ProductsOpenAccountDTO[];
+};
+
+export type ProductsOpenAccountDTO = SoldProductSaleDetail & {
+	timestamp: Date;
 };

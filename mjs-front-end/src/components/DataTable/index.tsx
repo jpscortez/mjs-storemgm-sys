@@ -54,7 +54,9 @@ export default function DataTable<TData>({
 					{table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row, i) => (
 							<TableRow
-								className="transition-colors hover:cursor-pointer"
+								className={`transition-colors ${
+									onRowDblClickExternal && "hover:cursor-pointer hover:bg-slate-100"
+								}`}
 								key={`${i}_${row.id}`}
 								data-state={row.getIsSelected() && "selected"}
 								onDoubleClick={() => onRowDblClick(row.original as TData)}
