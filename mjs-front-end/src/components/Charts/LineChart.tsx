@@ -8,7 +8,7 @@ type LineChartProps = {
 
 export function LineChart({chartConfig, chartData}: LineChartProps) {
 	return (
-		<ChartContainer config={chartConfig}>
+		<ChartContainer config={chartConfig} className="h-52">
 			<AreaChart
 				accessibilityLayer
 				data={chartData}

@@ -19,7 +19,7 @@ const products = [
 
 export function LowStockAlertCard() {
 	return (
-		<section className="col-span-2 row-span-1 p-6 shadow-2xl rounded-lg">
+		<section className="col-span-2 row-span-2 p-6 shadow-2xl rounded-lg">
 			<div className="w-full flex flex-row gap-4 items-center pb-2">
 				<Layers />
 				<h3>Estoque Baixo</h3>

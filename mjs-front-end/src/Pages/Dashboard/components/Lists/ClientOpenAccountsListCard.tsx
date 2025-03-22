@@ -20,7 +20,7 @@ export function ClientOpenAccountsListCard() {
 	});
 
 	return (
-		<section className="col-span-2 row-span-1 p-6 shadow-2xl rounded-lg">
+		<section className="col-span-2 row-span-2 p-6 shadow-2xl rounded-lg">
 			<div className="w-full flex flex-row gap-4 items-center pb-2">
 				<Users />
 				<h3>Contas em aberto</h3>
@@ -43,7 +43,7 @@ export function ClientOpenAccountsListCard() {
 									className="inline-flex justify-between w-full py-2 hover:cursor-pointer hover:bg-slate-100"
 									onDoubleClick={() => navigateToSellDetail(u)}
 								>
-									<div>{joinWithMaxLength([u.name], 15)}</div>
+									<div>{joinWithMaxLength([u.name], 30)}</div>
 									<span className="ml-auto">{formatPrice(u.total)}</span>
 								</ul>
 

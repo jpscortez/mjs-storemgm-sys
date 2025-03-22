@@ -1,6 +1,9 @@
 import {LineChart} from "@/components/Charts/LineChart";
 import {ChartConfig} from "@/components/ui/chart";
+import {format} from "date-fns";
 import {DollarSign} from "lucide-react";
+import {ptBR} from "date-fns/locale";
+import {toCaptalLetter} from "@/Utils/Functions/toCaptalLetter";
 
 const chartData = [
 	{month: "January", Recebido: 186, Devido: 0},
@@ -24,10 +27,10 @@ const chartConfig = {
 
 export function RecievablesChartCard() {
 	return (
-		<section className="col-span-4 row-span-2 p-6 shadow-2xl rounded-lg">
+		<section className="col-span-3 row-span-2 p-6 shadow-2xl rounded-lg">
 			<div className="w-full flex flex-row gap-4 items-center pb-2">
 				<DollarSign />
-				<h3>Vendas</h3>
+				<h3>{`Vendas - ${toCaptalLetter(format(new Date(), "MMMM yyyy", {locale: ptBR}))}`}</h3>
 			</div>
 			<LineChart chartConfig={chartConfig} chartData={chartData}></LineChart>
 		</section>

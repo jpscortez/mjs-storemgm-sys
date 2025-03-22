@@ -74,7 +74,7 @@ export function SalesByPaymentMethodChartCard() {
 	}, [sales]);
 
 	return (
-		<section className="col-span-3 row-span-2 p-6 shadow-2xl rounded-lg">
+		<section className="col-span-2 row-span-2 p-6 shadow-2xl rounded-lg">
 			<div className="w-full flex flex-row gap-4 items-center pb-2">
 				<CreditCard />
 				<h3>Meios de Pagamento</h3>
