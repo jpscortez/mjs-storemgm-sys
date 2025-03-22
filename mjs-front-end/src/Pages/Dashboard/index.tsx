@@ -1,7 +1,7 @@
 import Page from "@/components/Page";
-import {ClientOpenDebtsListCard} from "./components/ClientOpenDebtsListCard";
+import {ClientOpenAccountsListCard} from "./components/ClientOpenAccountsListCard";
 import {LowStockAlertCard} from "./components/LowStockAlertCard";
-import {PaymentMethodChartCard} from "./components/PaymentMethodChartCard";
+import {SalesByPaymentMethodChartCard} from "./components/SalesByPaymentMethodChartCard";
 import {RecievablesChartCard} from "./components/RecievablesChartCard";
 
 export default function DashboardPage() {
@@ -9,8 +9,8 @@ export default function DashboardPage() {
 		<Page>
 			<div className="h-full grid grid-cols-8 grid-rows-4 gap-4 grid-flow-row-dense">
 				<RecievablesChartCard />
-				<PaymentMethodChartCard />
-				<ClientOpenDebtsListCard />
+				<SalesByPaymentMethodChartCard />
+				<ClientOpenAccountsListCard />
 				<LowStockAlertCard />
 			</div>
 		</Page>

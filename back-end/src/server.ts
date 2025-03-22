@@ -11,6 +11,7 @@ import {fastifySwaggerUi} from "@fastify/swagger-ui";
 import {productRoutes} from "./routes/productRoutes";
 import {salesRoutes} from "./routes/saleRoutes";
 import {customerRoutes} from "./routes/customerRoutes";
+import {dashboardRoutes} from "./routes/dashboardRoutes";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -36,6 +37,7 @@ app.register(fastifySwaggerUi, {
 app.register(productRoutes);
 app.register(salesRoutes);
 app.register(customerRoutes);
+app.register(dashboardRoutes);
 
 app.listen({port: 3333, host: "0.0.0.0"}, (err: Error | null, address: string) => {
 	if (err) {

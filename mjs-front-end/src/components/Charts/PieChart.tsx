@@ -1,6 +1,6 @@
-import {Legend, Pie, PieChart as PieChartComponent} from "recharts";
+import {Pie, PieChart as PieChartComponent} from "recharts";
 
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
+import {ChartConfig, ChartContainer, ChartLegend, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
 
 type PieChartProps = {
 	chartConfig: ChartConfig;
@@ -10,6 +10,7 @@ type PieChartProps = {
 };
 
 export function PieChart({chartConfig, dataKey, nameKey, chartData}: PieChartProps) {
+	console.log(chartData);
 	return (
 		<ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
 			<PieChartComponent>
@@ -31,12 +32,12 @@ export function PieChart({chartConfig, dataKey, nameKey, chartData}: PieChartPro
 								dominantBaseline={props.dominantBaseline}
 								fill="hsla(var(--foreground))"
 							>
-								{payload[dataKey]}
+								{`${payload[dataKey]}`}
 							</text>
 						);
 					}}
 				/>
-				<Legend />
+				<ChartLegend />
 			</PieChartComponent>
 		</ChartContainer>
 	);
