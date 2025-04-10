@@ -36,10 +36,9 @@ export function ClientOpenAccountsListCard() {
 					</div>
 				) : accounts!.length > 0 ? (
 					<div className="text-sm h-full overflow-auto">
-						{accounts!.map((u) => (
-							<>
+						{accounts!.map((u, i) => (
+							<div className="grid group" key={i}>
 								<ul
-									key={u.customerCode}
 									className="inline-flex justify-between w-full py-2 hover:cursor-pointer hover:bg-slate-100"
 									onDoubleClick={() => navigateToSellDetail(u)}
 								>
@@ -47,8 +46,8 @@ export function ClientOpenAccountsListCard() {
 									<span className="ml-auto">{formatPrice(u.total)}</span>
 								</ul>
 
-								<div className="w-full border-b last:hidden" />
-							</>
+								<div className="w-full border-b group-last:hidden" />
+							</div>
 						))}
 					</div>
 				) : (

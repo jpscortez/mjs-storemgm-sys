@@ -3,10 +3,11 @@ import {ChartConfig, ChartContainer, ChartLegend, ChartTooltip, ChartTooltipCont
 
 type LineChartProps = {
 	chartConfig: ChartConfig;
-	chartData: {[key: string]: string | number}[] | undefined;
+	dataKey: string;
+	chartData: {[key: string]: string | number}[];
 };
 
-export function LineChart({chartConfig, chartData}: LineChartProps) {
+export function LineChart({chartConfig, chartData, dataKey}: LineChartProps) {
 	return (
 		<ChartContainer config={chartConfig} className="h-52">
 			<AreaChart
@@ -19,7 +20,7 @@ export function LineChart({chartConfig, chartData}: LineChartProps) {
 			>
 				<CartesianGrid vertical={false} />
 				<XAxis
-					dataKey="month"
+					dataKey={dataKey}
 					tickLine={false}
 					axisLine={false}
 					tickMargin={8}

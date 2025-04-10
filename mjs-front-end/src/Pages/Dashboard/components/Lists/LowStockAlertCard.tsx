@@ -25,8 +25,8 @@ export function LowStockAlertCard() {
 				<h3>Estoque Baixo</h3>
 			</div>
 			<div className="text-sm overflow-auto">
-				{products.map((u) => (
-					<>
+				{products.map((u, i) => (
+					<div className="grid group" key={i}>
 						<ul className="inline-flex justify-between w-full py-2">
 							<div className="inline-flex items-center gap-2">
 								<div
@@ -39,8 +39,8 @@ export function LowStockAlertCard() {
 							</div>
 							<span className="ml-auto">{u.stockAmount}</span>
 						</ul>
-						<div className="w-full border-b last:hidden" />
-					</>
+						<div className="w-full border-b group-last:hidden" />
+					</div>
 				))}
 			</div>
 		</section>

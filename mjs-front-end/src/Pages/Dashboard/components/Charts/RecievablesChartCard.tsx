@@ -4,35 +4,33 @@ import {format} from "date-fns";
 import {DollarSign} from "lucide-react";
 import {ptBR} from "date-fns/locale";
 import {toCaptalLetter} from "@/Utils/Functions/toCaptalLetter";
-
-const chartData = [
-	{month: "January", Recebido: 186, Devido: 0},
-	{month: "February", Recebido: 305, Devido: 0},
-	{month: "March", Recebido: 237, Devido: 0},
-	{month: "April", Recebido: 73, Devido: 0},
-	{month: "May", Recebido: 209, Devido: 20},
-	{month: "June", Recebido: 214, Devido: 140},
-];
+import {useQuery} from "@tanstack/react-query";
+import {getDashboardSalesByStatus} from "@/services/dashboard";
 
 const chartConfig = {
-	Recebido: {
-		label: "Recebido",
-		color: "hsl(var(--chart-2))",
-	},
 	Devido: {
 		label: "Devido",
 		color: "hsl(var(--chart-1))",
 	},
+	Recebido: {
+		label: "Recebido",
+		color: "hsl(var(--chart-2))",
+	},
 } satisfies ChartConfig;
 
 export function RecievablesChartCard() {
+	const {data: sales, isLoading} = useQuery({
+		queryKey: ["dashboard", "salesByStatus"],
+		queryFn: getDashboardSalesByStatus,
+	});
+
 	return (
 		<section className="col-span-3 row-span-2 p-6 shadow-2xl rounded-lg">
 			<div className="w-full flex flex-row gap-4 items-center pb-2">
 				<DollarSign />
-				<h3>{`Vendas - ${toCaptalLetter(format(new Date(), "MMMM yyyy", {locale: ptBR}))}`}</h3>
+				<h3>{`Vendas Acumuladas - ${toCaptalLetter(format(new Date(), "MMMM yyyy", {locale: ptBR}))}`}</h3>
 			</div>
-			<LineChart chartConfig={chartConfig} chartData={chartData}></LineChart>
+			{!isLoading && <LineChart chartConfig={chartConfig} dataKey="day" chartData={sales!}></LineChart>}
 		</section>
 	);
 }

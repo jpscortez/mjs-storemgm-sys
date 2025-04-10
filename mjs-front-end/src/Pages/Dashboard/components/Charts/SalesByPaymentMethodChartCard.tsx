@@ -54,11 +54,13 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function SalesByPaymentMethodChartCard() {
-	const {data: sales, isLoading} = useQuery({
+	const {data: sales, isLoading: salesByPaymentMethodLoading} = useQuery({
 		queryKey: ["dashboard", "salesByPaymentMethod"],
 		queryFn: getDashboardSalesByPaymentMethod,
 	});
 	const [chartData, setChartData] = useState(chartDataDefault);
+
+	useEffect(() => console.log(sales), [sales]);
 
 	useEffect(() => {
 		if (sales) {
@@ -79,7 +81,7 @@ export function SalesByPaymentMethodChartCard() {
 				<CreditCard />
 				<h3>Meios de Pagamento</h3>
 			</div>
-			{!isLoading && (
+			{!salesByPaymentMethodLoading && (
 				<PieChart chartConfig={chartConfig} chartData={chartData} nameKey="paymentMethod" dataKey="total" />
 			)}
 		</section>
