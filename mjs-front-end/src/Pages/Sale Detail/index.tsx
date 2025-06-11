@@ -41,11 +41,18 @@ export default function SaleDetailPage() {
 					</MyCard.Actions>
 				</MyCard.Header>
 				<MyCard.Content>
-					<div>
-						<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' HH:mm")}</p>
-						<p>Cliente: {sale!.customer.name}</p>
-						<p>Pagamento: {sale!.paymentMethod}</p>
-						<p>Valor Pago: {formatPrice(sale!.totalPaid)}</p>
+					<div className="grid gap-2">
+						<div>
+							<p>Data: {format(sale!.timestamp, "dd/MM/yyyy 'às' HH:mm")}</p>
+							<p>Cliente: {sale!.customer.name}</p>
+							<p>Pagamento: {sale!.paymentMethod}</p>
+							<p>Total da venda: {formatPrice(sale!.totalPaid)}</p>
+						</div>
+						{sale!.isOpen && (
+							<div>
+								<span className="text-red-400 rounded bg-red-100 px-2 py-1">Valor em aberto</span>
+							</div>
+						)}
 					</div>
 					<SaleDetailProductsTable products={sale!.products} />
 				</MyCard.Content>

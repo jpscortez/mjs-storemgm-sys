@@ -1,17 +1,26 @@
 import {format} from "date-fns";
-import {Sale} from "@/Models/Sale";
+import {SaleSummaryDTO} from "@/Models/SaleSummaryDTO";
 import {ColumnDef} from "@tanstack/react-table";
 import {joinWithMaxLength} from "@/Utils/Functions/joinWithMaxLenght";
 import {formatPrice} from "@/Utils/Functions/parser";
 
-export const columns: ColumnDef<Sale>[] = [
+export const columns: ColumnDef<SaleSummaryDTO>[] = [
 	{
 		accessorKey: "timestamp",
 		header: "Data",
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy HH:mm");
+			return format(date, "dd/MM/yyy");
+		},
+	},
+	{
+		accessorKey: "customerName",
+		header: "Cliente",
+		cell: ({row}) => {
+			const customerName: string = row.getValue("customerName");
+
+			return joinWithMaxLength([customerName], 20);
 		},
 	},
 	{
@@ -35,14 +44,17 @@ export const columns: ColumnDef<Sale>[] = [
 			return formatPrice(totalPaid);
 		},
 	},
-	// {
-	//     accessorKey: "sellPrice",
-	//     header: () => <div className="text-right">Preço</div>,
-	//     cell: ({ row }) => {
-	//         const sellPrice = parseFloat(row.getValue("sellPrice"))
-	//         const formatted = parsePrice(sellPrice)
+	{
+		accessorKey: "isOpen",
+		header: "Status",
+		cell: ({row}) => {
+			const isOpen: boolean = row.getValue("isOpen");
 
-	//         return <div className="text-right font-medium">{formatted}</div>
-	//     },
-	// }
+			return isOpen ? (
+				<span className="text-red-400 rounded bg-red-100 px-2 py-1">Não Pago</span>
+			) : (
+				<span className="text-green-400 rounded bg-green-100 px-2 py-1">Pago</span>
+			);
+		},
+	},
 ];

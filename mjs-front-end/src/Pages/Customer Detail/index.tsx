@@ -61,7 +61,10 @@ export default function CustomerDetailPage() {
 						) : (
 							<>
 								{customerDetail!.missingComplements && (
-									<span className="text-red-400 rounded bg-red-100"> Complete o cadastro</span>
+									<span className="text-red-400 rounded bg-red-100 px-2 py-1">
+										{" "}
+										Complete o cadastro →
+									</span>
 								)}
 								<Button size="icon" onClick={onEditClicked}>
 									<Edit />

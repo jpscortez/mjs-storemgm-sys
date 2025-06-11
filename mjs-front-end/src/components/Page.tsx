@@ -9,7 +9,7 @@ type PageProps = {
 
 export default function Page({children, backUri}: PageProps) {
 	return (
-		<div className="w-full h-full">
+		<div className="w-10/12 h-full container">
 			<div className="h-0">
 				{backUri && (
 					<Link to={backUri} className="overflow-visible">

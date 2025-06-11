@@ -1,5 +1,5 @@
 import z from "zod";
-import {FastifyTypedInstance} from "../types";
+import {FastifyTypedInstance} from "../@types/types";
 import * as service from "../services/sale";
 
 export async function salesRoutes(app: FastifyTypedInstance) {
@@ -56,11 +56,13 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 				response: {
 					200: z.array(
 						z.object({
-							saleId: z.number().int(),
+							code: z.number().int(),
 							totalPaid: z.number(),
+							customerName: z.string(),
 							numItems: z.number().int(),
 							timestamp: z.date(),
 							productNames: z.array(z.string()),
+							isOpen: z.boolean(),
 						})
 					),
 				},
@@ -104,6 +106,7 @@ export async function salesRoutes(app: FastifyTypedInstance) {
 							identification: z.string().optional(),
 						}),
 						paymentMethod: z.string(),
+						isOpen: z.boolean(),
 					}),
 				},
 			},

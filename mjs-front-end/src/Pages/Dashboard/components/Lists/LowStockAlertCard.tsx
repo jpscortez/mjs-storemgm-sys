@@ -24,20 +24,23 @@ export function LowStockAlertCard() {
 				<Layers />
 				<h3>Estoque Baixo</h3>
 			</div>
-			<div className="text-sm">
-				{products.map((u) => (
-					<ul className="inline-flex justify-between w-full py-2 border-b">
-						<div className="inline-flex items-center gap-2">
-							<div
-								className={twMerge(
-									"size-2 rounded-full",
-									u.stockAmount <= 5 ? "bg-red-500" : "bg-yellow-500"
-								)}
-							/>
-							{joinWithMaxLength([u.name], 20)}
-						</div>
-						<span className="ml-auto">{u.stockAmount}</span>
-					</ul>
+			<div className="text-sm overflow-auto">
+				{products.map((u, i) => (
+					<div className="grid group" key={i}>
+						<ul className="inline-flex justify-between w-full py-2">
+							<div className="inline-flex items-center gap-2">
+								<div
+									className={twMerge(
+										"size-2 rounded-full",
+										u.stockAmount <= 5 ? "bg-red-500" : "bg-yellow-500"
+									)}
+								/>
+								{joinWithMaxLength([u.name], 20)}
+							</div>
+							<span className="ml-auto">{u.stockAmount}</span>
+						</ul>
+						<div className="w-full border-b group-last:hidden" />
+					</div>
 				))}
 			</div>
 		</section>

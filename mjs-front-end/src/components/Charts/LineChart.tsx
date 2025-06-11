@@ -1,14 +1,15 @@
 import {CartesianGrid, XAxis, YAxis, AreaChart, Area} from "recharts";
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
+import {ChartConfig, ChartContainer, ChartLegend, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
 
 type LineChartProps = {
 	chartConfig: ChartConfig;
-	chartData: {[key: string]: string | number}[] | undefined;
+	dataKey: string;
+	chartData: {[key: string]: string | number}[];
 };
 
-export function LineChart({chartConfig, chartData}: LineChartProps) {
+export function LineChart({chartConfig, chartData, dataKey}: LineChartProps) {
 	return (
-		<ChartContainer config={chartConfig}>
+		<ChartContainer config={chartConfig} className="h-52">
 			<AreaChart
 				accessibilityLayer
 				data={chartData}
@@ -19,7 +20,7 @@ export function LineChart({chartConfig, chartData}: LineChartProps) {
 			>
 				<CartesianGrid vertical={false} />
 				<XAxis
-					dataKey="month"
+					dataKey={dataKey}
 					tickLine={false}
 					axisLine={false}
 					tickMargin={8}
@@ -48,6 +49,8 @@ export function LineChart({chartConfig, chartData}: LineChartProps) {
 						stackId="a"
 					/>
 				))}
+
+				<ChartLegend />
 			</AreaChart>
 		</ChartContainer>
 	);

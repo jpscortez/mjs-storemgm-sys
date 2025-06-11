@@ -11,6 +11,8 @@ import TestPage from "@/Pages/Test";
 import CustomersPage from "@/Pages/Customers";
 import CustomerDetailPage from "@/Pages/Customer Detail";
 import DashboardPage from "@/Pages/Dashboard";
+import OpenAccountsPage from "@/Pages/Open Accounts";
+import SettleOpenAccountPage from "@/Pages/Settle Open Account";
 
 export default function Router() {
 	return (
@@ -29,6 +31,8 @@ export default function Router() {
 						<Route element={<NewSalePage />} path="/new-sale" />
 						<Route element={<CustomersPage />} path="/customers" />
 						<Route element={<CustomerDetailPage />} path="/customers/:customerCode" />
+						<Route element={<OpenAccountsPage />} path="/open-accounts" />
+						<Route element={<SettleOpenAccountPage />} path="/open-accounts/settle/:customerCode" />
 					</Route>
 				</Route>
 			</Routes>

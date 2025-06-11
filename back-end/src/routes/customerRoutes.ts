@@ -1,5 +1,5 @@
 import z from "zod";
-import {FastifyTypedInstance} from "../types";
+import {FastifyTypedInstance} from "../@types/types";
 import * as service from "../services/customer";
 
 export async function customerRoutes(app: FastifyTypedInstance) {
@@ -50,6 +50,7 @@ export async function customerRoutes(app: FastifyTypedInstance) {
 								numItems: z.number().int(),
 								timestamp: z.date(),
 								totalPaid: z.number(),
+								isOpen: z.boolean(),
 							})
 						),
 					}),

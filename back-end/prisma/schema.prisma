@@ -31,6 +31,7 @@ model Sale {
   // A sale can have many products sold (with quantity and discounts)
   productSold ProductSold[]
 
+  isOpen       Boolean   @default(false)
   payment      Payment?  @relation(name: "payment_to_sale")
   customerCode Int
   customer     Customer? @relation(name: "customer_to_sale", fields: [customerCode], references: [code])
@@ -75,4 +76,15 @@ model Payment {
   sale     Sale @relation(name: "payment_to_sale", fields: [saleCode], references: [code])
 
   @@map("payments")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
 }
