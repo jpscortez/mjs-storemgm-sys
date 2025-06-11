@@ -1,5 +1,5 @@
 import z from "zod";
-import {FastifyTypedInstance} from "../@types/types";
+import {FastifyTypedInstance} from "../types/fastify-typed-instace";
 import * as service from "../services/customer";
 
 export async function customerRoutes(app: FastifyTypedInstance) {

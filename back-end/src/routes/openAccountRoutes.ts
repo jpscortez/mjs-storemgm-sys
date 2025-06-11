@@ -1,5 +1,5 @@
 import z from "zod";
-import {FastifyTypedInstance} from "../@types/types";
+import {FastifyTypedInstance} from "../types/fastify-typed-instace";
 import * as service from "../services/open-account";
 
 export function openAccountRoutes(app: FastifyTypedInstance) {

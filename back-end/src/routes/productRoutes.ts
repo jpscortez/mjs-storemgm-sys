@@ -1,6 +1,6 @@
 import z from "zod";
 import * as service from "../services/product";
-import {FastifyTypedInstance} from "../@types/fastify-typed-instace";
+import {FastifyTypedInstance} from "../types/fastify-typed-instace";
 
 export async function productRoutes(app: FastifyTypedInstance) {
 	app.get(

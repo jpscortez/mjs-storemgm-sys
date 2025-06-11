@@ -1,8 +1,6 @@
 import z from "zod";
 import * as service from "../services/auth";
-import {authMiddleware} from "../middlewares/auth";
-import fastify from "fastify";
-import {FastifyTypedInstance} from "../@types/fastify-typed-instace";
+import {FastifyTypedInstance} from "../types/fastify-typed-instace";
 
 export async function authRoutes(app: FastifyTypedInstance) {
 	app.post(
