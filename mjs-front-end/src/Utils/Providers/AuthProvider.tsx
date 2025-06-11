@@ -1,33 +1,59 @@
-import { createContext, ReactNode, useState } from "react";
+import {createContext, ReactNode, useLayoutEffect, useState} from "react";
+import {authenticate, signIn as signInRequest} from "@/services/auth";
+import Cookies from "js-cookie";
+import {User} from "@/Models/User";
+import {apiClient} from "../apiClient";
 
-interface AuthContextProps {
-    user: boolean;
-    isLoggedIn: boolean;
-    login: () => void;
-    logout: () => void;
-}
+type AuthContextProps = {
+	user: User | null;
+	isAuthenticated: boolean;
+	signIn: (data: SignInProps) => Promise<void>;
+	logout: () => void;
+};
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState(localStorage.getItem("user") && true || false)
-    const [isLoggedIn, setIsLoggedIn] = useState(user)
+type SignInProps = {
+	username: string;
+	password: string;
+};
 
-    function login() {
-        localStorage.setItem("user", "user")
-        setUser(true)
-        setIsLoggedIn(true)
-    }
+export function AuthProvider({children}: {children: ReactNode}) {
+	const [user, setUser] = useState<User | null>(null);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    function logout() {
-        localStorage.removeItem("user")
-        setUser(false)
-        setIsLoggedIn(false)
-    }
+	useLayoutEffect(() => {
+		const token = Cookies.get("mjs.token");
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout, isLoggedIn }}>
-            {children}
-        </AuthContext.Provider>
-    )
+		if (token) {
+			authenticate().then((user) => {
+				setUser(user);
+				setIsAuthenticated(true);
+			});
+		}
+	}, []);
+
+	async function signIn({username, password}: SignInProps) {
+		const {token, user} = await signInRequest({username, password});
+
+		apiClient.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+		Cookies.set("mjs.token", token, {
+			expires: 1,
+			secure: true,
+			sameSite: "Strict",
+		});
+
+		setUser(user);
+		setIsAuthenticated(true);
+	}
+
+	function logout() {
+		apiClient.defaults.headers["Authorization"] = "";
+		Cookies.remove("mjs.token");
+		setUser(null);
+		setIsAuthenticated(false);
+	}
+
+	return <AuthContext.Provider value={{user, signIn, logout, isAuthenticated}}>{children}</AuthContext.Provider>;
 }

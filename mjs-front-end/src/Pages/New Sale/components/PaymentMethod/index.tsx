@@ -34,7 +34,6 @@ export function PaymentMethod() {
 	const {handleSubmit} = form;
 
 	const onSubmit = (data: PaymentMethodFormData) => {
-		console.log(data);
 		setPaymentMethod(data.method);
 		nextStep();
 	};

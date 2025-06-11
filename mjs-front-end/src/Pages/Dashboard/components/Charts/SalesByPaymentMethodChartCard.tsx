@@ -60,8 +60,6 @@ export function SalesByPaymentMethodChartCard() {
 	});
 	const [chartData, setChartData] = useState(chartDataDefault);
 
-	useEffect(() => console.log(sales), [sales]);
-
 	useEffect(() => {
 		if (sales) {
 			const data = deepCopy(chartDataDefault);
