@@ -3,8 +3,19 @@ import bcrypt from "bcryptjs";
 import {generateToken} from "../../helpers/jwt";
 
 export async function Login(username: string, password: string) {
+	console.log({username, password});
 	// Step 1: Fetch a user with the given email
-	const user = await prismaClient.user.findUnique({where: {username}});
+	const user = await prismaClient.user.findFirst({
+		where: {username},
+		select: {
+			password: true,
+			name: true,
+			id: true,
+			username: true,
+		},
+	});
+
+	console.log(user);
 
 	// If no user is found, throw an error
 	if (!user) {
