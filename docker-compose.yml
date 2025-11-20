@@ -12,7 +12,7 @@ services:
     volumes:
       - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - '80:80'
+      - '8080:80'
 
   frontend:
     container_name: frontend
@@ -20,6 +20,7 @@ services:
       context: ./mjs-front-end
     environment:
       NODE_ENV: production
+      VITE_BACKEND_API: api
     depends_on:
       - backend
       - db
@@ -35,6 +36,7 @@ services:
       DATABASE_DB: polls
       DATABASE_PASSWORD: docker
       DATABASE_PORT: 5432
+      DATABASE_URL: postgresql://docker:docker@db:5432/polls
     depends_on:
       - db
     command: sh -c "npx prisma migrate deploy && npx prisma db seed && npm run start:prod"
