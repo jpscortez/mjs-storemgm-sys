@@ -38,7 +38,8 @@ services:
       DATABASE_PORT: 5432
       DATABASE_URL: postgresql://docker:docker@db:5432/polls
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     command: sh -c "npx prisma migrate deploy && npx prisma db seed && npm run start:prod"
 
   db:
