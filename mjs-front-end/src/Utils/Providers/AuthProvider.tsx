@@ -38,10 +38,14 @@ export function AuthProvider({children}: {children: ReactNode}) {
 
 		apiClient.defaults.headers["Authorization"] = `Bearer ${token}`;
 
+		// Detecta se estamos em ambiente seguro (HTTPS) ou local
+		const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+
 		Cookies.set("mjs.token", token, {
-			expires: 1,
-			secure: true,
+			expires: 1, // 1 dia de expiração
+			secure: !isLocalhost, // apenas HTTPS em produção
 			sameSite: "Strict",
+			path: "/", // cookie acessível em toda a aplicação
 		});
 
 		setUser(user);
