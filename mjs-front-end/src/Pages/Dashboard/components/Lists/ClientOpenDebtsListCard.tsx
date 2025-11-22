@@ -1,22 +1,22 @@
 import {Skeleton} from "@/components/ui/skeleton";
-import {OpenAccountDashboardDTO} from "@/Models/OpenAccountDashboardDTO";
-import {getDashboardOpenAccounts} from "@/services/dashboard";
+import {OpenDebtDashboardDTO} from "@/Models/OpenDebtDashboardDTO";
+import {getDashboardOpenDebts} from "@/services/dashboard";
 import {joinWithMaxLength} from "@/Utils/Functions/joinWithMaxLenght";
 import {formatPrice} from "@/Utils/Functions/parser";
 import {useQuery} from "@tanstack/react-query";
 import {Users} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 
-export function ClientOpenAccountsListCard() {
+export function ClientOpenDebtsListCard() {
 	const navigate = useNavigate();
 
-	function navigateToSellDetail(openAccount: OpenAccountDashboardDTO) {
-		navigate(`/open-accounts/settle/${openAccount.customerCode}`);
+	function navigateToSellDetail(openDebt: OpenDebtDashboardDTO) {
+		navigate(`/open-debts/settle/${openDebt.customerCode}`);
 	}
 
-	const {data: accounts, isLoading} = useQuery({
-		queryKey: ["dashboard", "openAccounts"],
-		queryFn: getDashboardOpenAccounts,
+	const {data: debts, isLoading} = useQuery({
+		queryKey: ["dashboard", "openDebts"],
+		queryFn: getDashboardOpenDebts,
 	});
 
 	return (
@@ -34,9 +34,9 @@ export function ClientOpenAccountsListCard() {
 							<Skeleton className="h-4 w-[200px]" />
 						</div>
 					</div>
-				) : accounts!.length > 0 ? (
+				) : debts!.length > 0 ? (
 					<div className="text-sm h-full overflow-auto">
-						{accounts!.map((u, i) => (
+						{debts!.map((u, i) => (
 							<div className="grid group" key={i}>
 								<ul
 									className="inline-flex justify-between w-full py-2 hover:cursor-pointer hover:bg-slate-100"

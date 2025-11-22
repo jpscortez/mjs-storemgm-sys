@@ -7,5 +7,5 @@ export enum PaymentMethodType {
 	DebitCard = "Cartão de débito",
 	Pix = "Pix",
 	Cash = "Dinheiro",
-	OutstandingBalance = "A Prazo",
+	OpenBalance = "A Prazo",
 }

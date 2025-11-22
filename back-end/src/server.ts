@@ -12,7 +12,7 @@ import {productRoutes} from "./routes/productRoutes";
 import {salesRoutes} from "./routes/saleRoutes";
 import {customerRoutes} from "./routes/customerRoutes";
 import {dashboardRoutes} from "./routes/dashboardRoutes";
-import {openAccountRoutes} from "./routes/openAccountRoutes";
+import {openDebtsRoutes} from "./routes/openDebtsRoutes";
 import {authRoutes} from "./routes/authRoutes";
 import {authMiddleware} from "./middlewares/auth";
 
@@ -60,7 +60,7 @@ app.register(productRoutes);
 app.register(salesRoutes);
 app.register(customerRoutes);
 app.register(dashboardRoutes);
-app.register(openAccountRoutes);
+app.register(openDebtsRoutes);
 app.register(authRoutes);
 
 app.listen({port: 3333, host: "0.0.0.0"}, (err: Error | null, address: string) => {

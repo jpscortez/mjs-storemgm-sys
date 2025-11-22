@@ -1,6 +1,6 @@
 import {prismaClient} from "../../database/prisma-client";
 
-export async function GetOpenAccountByCode(code: number) {
+export async function GetOpenDebtsByCode(code: number) {
 	return await prismaClient.customer
 		.findFirstOrThrow({
 			where: {

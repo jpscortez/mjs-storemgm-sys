@@ -1,6 +1,6 @@
 import {prismaClient} from "../../database/prisma-client";
 
-export async function GetOpenAccounts() {
+export async function GetOpenDebts() {
 	return await prismaClient.customer
 		.findMany({
 			where: {
@@ -20,8 +20,8 @@ export async function GetOpenAccounts() {
 				},
 			},
 		})
-		.then((accountRaw) => {
-			return accountRaw.map(({code, name, purchases}) => {
+		.then((debtRaw) => {
+			return debtRaw.map(({code, name, purchases}) => {
 				return {
 					customerCode: code,
 					name,

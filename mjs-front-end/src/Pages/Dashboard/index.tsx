@@ -1,4 +1,4 @@
-import {ClientOpenAccountsListCard} from "./components/Lists/ClientOpenAccountsListCard";
+import {ClientOpenDebtsListCard} from "./components/Lists/ClientOpenDebtsListCard";
 import {LowStockAlertCard} from "./components/Lists/LowStockAlertCard";
 import {SalesByPaymentMethodChartCard} from "./components/Charts/SalesByPaymentMethodChartCard";
 import {RecievablesChartCard} from "./components/Charts/RecievablesChartCard";
@@ -8,7 +8,7 @@ export default function DashboardPage() {
 		<div className="h-screen grid grid-cols-8 grid-rows-5 gap-4 grid-flow-row-dense">
 			<RecievablesChartCard />
 			<SalesByPaymentMethodChartCard />
-			<ClientOpenAccountsListCard />
+			<ClientOpenDebtsListCard />
 			<LowStockAlertCard />
 		</div>
 	);

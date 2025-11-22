@@ -13,7 +13,7 @@ interface DataTableProps<TData> {
 export default function DataTable<TData>({
 	columns,
 	data,
-	emptyDataMsg = "No results.",
+	emptyDataMsg = "Sem Resultados",
 	onRowDblClick: onRowDblClickExternal,
 	className,
 }: DataTableProps<TData>) {
@@ -62,7 +62,10 @@ export default function DataTable<TData>({
 								onDoubleClick={() => onRowDblClick(row.original as TData)}
 							>
 								{row.getVisibleCells().map((cell, j) => (
-									<TableCell className="w-fit" key={`${j}_${cell.id}`}>
+									<TableCell
+										className={cell.column.getSize() ? `w-${cell.column.getSize()}` : "w-fit"}
+										key={`${j}_${cell.id}`}
+									>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}

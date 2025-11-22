@@ -1,7 +1,6 @@
 import {CustomerDetailPurchasesDTO} from "@/Models/CustomerDetailDTO";
-import {formatPrice} from "@/Utils/Functions/parser";
+import {formatDate, formatPrice} from "@/Utils/Functions/parser";
 import {ColumnDef} from "@tanstack/react-table";
-import {format} from "date-fns";
 
 export const columns: ColumnDef<CustomerDetailPurchasesDTO>[] = [
 	{
@@ -10,7 +9,7 @@ export const columns: ColumnDef<CustomerDetailPurchasesDTO>[] = [
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy 'às' H:mm");
+			return formatDate(date, true);
 		},
 	},
 	{

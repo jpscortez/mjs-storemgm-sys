@@ -14,7 +14,7 @@ const chartDataDefault: SalesByPaymentChartData[] = [
 	{paymentMethod: "Pix", label: PaymentMethodType.Pix, total: 0, fill: "var(--color-Pix)"},
 	{
 		paymentMethod: "Prazo",
-		label: PaymentMethodType.OutstandingBalance,
+		label: PaymentMethodType.OpenBalance,
 		total: 0,
 		fill: "var(--color-Prazo)",
 	},

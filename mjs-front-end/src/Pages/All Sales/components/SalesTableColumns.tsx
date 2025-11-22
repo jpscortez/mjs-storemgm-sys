@@ -1,8 +1,7 @@
-import {format} from "date-fns";
 import {SaleSummaryDTO} from "@/Models/SaleSummaryDTO";
 import {ColumnDef} from "@tanstack/react-table";
 import {joinWithMaxLength} from "@/Utils/Functions/joinWithMaxLenght";
-import {formatPrice} from "@/Utils/Functions/parser";
+import {formatDate, formatPrice} from "@/Utils/Functions/parser";
 
 export const columns: ColumnDef<SaleSummaryDTO>[] = [
 	{
@@ -11,7 +10,7 @@ export const columns: ColumnDef<SaleSummaryDTO>[] = [
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy");
+			return formatDate(date);
 		},
 	},
 	{

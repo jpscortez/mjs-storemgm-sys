@@ -4,10 +4,10 @@ import * as service from "../services/dashboard";
 
 export async function dashboardRoutes(app: FastifyTypedInstance) {
 	app.get(
-		"/dashboard/open-accounts",
+		"/dashboard/open-debts",
 		{
 			schema: {
-				description: "Get Open Accounts for Dashboard",
+				description: "Get Open Debts for Dashboard",
 				tags: ["Dashboard"],
 				response: {
 					200: z.array(
@@ -21,8 +21,8 @@ export async function dashboardRoutes(app: FastifyTypedInstance) {
 			},
 		},
 		async (_, reply) => {
-			const openAccounts = await service.GetOpenAccounts();
-			return reply.status(200).send(openAccounts);
+			const openDebts = await service.GetOpenDebts();
+			return reply.status(200).send(openDebts);
 		}
 	);
 

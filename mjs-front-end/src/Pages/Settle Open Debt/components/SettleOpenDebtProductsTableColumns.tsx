@@ -1,15 +1,15 @@
-import {ProductsOpenAccountDTO} from "@/Models/OpenAccountDTO";
+import {ProductsOpenDebtDTO} from "@/Models/OpenDebtDTO";
+import {formatDate} from "@/Utils/Functions/parser";
 import {ColumnDef} from "@tanstack/react-table";
-import {format} from "date-fns";
 
-export const columns: ColumnDef<ProductsOpenAccountDTO>[] = [
+export const columns: ColumnDef<ProductsOpenDebtDTO>[] = [
 	{
 		accessorKey: "timestamp",
 		header: "Data",
 		cell: ({row}) => {
 			const date = new Date(row.getValue("timestamp"));
 
-			return format(date, "dd/MM/yyy HH:mm");
+			return formatDate(date, true);
 		},
 	},
 	{

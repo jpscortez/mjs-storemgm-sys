@@ -17,7 +17,7 @@ export default function SideBarRoot() {
 				<SideBarItem icon={CircleDollarSign} caption="Minhas Vendas" to="/sales" end />
 				<SideBarItem icon={ShoppingBag} caption="Nova Venda" to="/new-sale" />
 				<SideBarItem icon={Users} caption="Clientes" to="/customers" />
-				<SideBarItem icon={Handshake} caption="Quitar contas" to="/open-accounts" />
+				<SideBarItem icon={Handshake} caption="Quitar contas" to="/open-debts" />
 			</div>
 
 			<div>
