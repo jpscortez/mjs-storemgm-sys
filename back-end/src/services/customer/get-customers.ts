@@ -1,23 +1,17 @@
 import {prismaClient} from "../../database/prisma-client";
 
 export async function GetCustomers() {
-	return await prismaClient.customer
-		.findMany({
-			include: {
-				_count: {
-					select: {
-						purchases: true,
-					},
+	return await prismaClient.customer.findMany({}).then((customersRaw) => {
+		return customersRaw.map(({code, name, phoneNumber, address, identification}) => {
+			return {
+				code,
+				name,
+				status: {
+					phoneNumber: phoneNumber !== null,
+					address: address !== null,
+					identification: identification !== null,
 				},
-			},
-		})
-		.then((customersRaw) => {
-			return customersRaw.map(({code, name, _count}) => {
-				return {
-					code,
-					name,
-					numberOfPurchases: _count.purchases,
-				};
-			});
+			};
 		});
+	});
 }

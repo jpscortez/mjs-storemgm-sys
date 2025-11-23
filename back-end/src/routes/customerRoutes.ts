@@ -14,7 +14,11 @@ export async function customerRoutes(app: FastifyTypedInstance) {
 						z.object({
 							code: z.number().int(),
 							name: z.string(),
-							numberOfPurchases: z.number().int(),
+							status: z.object({
+								phoneNumber: z.boolean(),
+								address: z.boolean(),
+								identification: z.boolean(),
+							}),
 						})
 					),
 				},

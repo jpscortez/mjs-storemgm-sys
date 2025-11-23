@@ -1,5 +1,11 @@
 export type CustomerSummaryDTO = {
 	code: number;
 	name: string;
-	numberOfPurchases: number;
+	status: CustomerRegisterStatus;
+};
+
+export type CustomerRegisterStatus = {
+	phoneNumber: boolean;
+	address: boolean;
+	identification: boolean;
 };
