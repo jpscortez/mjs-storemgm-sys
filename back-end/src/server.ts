@@ -15,6 +15,7 @@ import {dashboardRoutes} from "./routes/dashboardRoutes";
 import {openDebtsRoutes} from "./routes/openDebtsRoutes";
 import {authRoutes} from "./routes/authRoutes";
 import {authMiddleware} from "./middlewares/auth";
+import {healthRoutes} from "./routes/healthRoutes";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -56,6 +57,7 @@ app.register(fastifySwaggerUi, {
 
 app.decorate("authenticate", authMiddleware);
 
+app.register(healthRoutes);
 app.register(productRoutes);
 app.register(salesRoutes);
 app.register(customerRoutes);
